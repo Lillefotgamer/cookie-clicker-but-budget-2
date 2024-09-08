@@ -2,7 +2,6 @@ namespace SpriteKind {
     export const BigCookie = SpriteKind.create()
     export const Milk = SpriteKind.create()
     export const Upgrade = SpriteKind.create()
-    export const Text = SpriteKind.create()
     export const GoldenCookie = SpriteKind.create()
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -59,17 +58,34 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Milk, function (sprite, otherSpr
         if (controller.up.isPressed()) {
             if (Milk.y > 60) {
                 Milk.y += -1
+                timer.after(5000, function () {
+                    Milk.y += 1
+                })
             }
         }
     }
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Milk, function (sprite, otherSprite) {
+    CookieAmount += 1 * CookieWorth
+    sprites.destroy(sprite)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Upgrade, function (sprite, otherSprite) {
     if (controller.A.isPressed()) {
-    	
+        if (UpgradeNumber == 1) {
+            if (CookieAmount > 99) {
+                CookieAmount += -100
+                CookieWorth += 1
+                RandomCookie += 1
+                sprites.destroy(otherSprite)
+            }
+        }
     }
 })
+let CookieAmount = 0
 let Cookie: Sprite = null
 let SelectedCookie = 0
+let CookieWorth = 0
+let UpgradeNumber = 0
 let RandomCookie = 0
 let Milk: Sprite = null
 let Cursor: Sprite = null
@@ -252,4 +268,11 @@ let Upgrade = sprites.create(img`
     6666666666666666666666666666666666666666
     `, SpriteKind.Upgrade)
 Upgrade.setPosition(140, 8)
-let UpgradeNumber = 1
+UpgradeNumber = 1
+let CookieCounter = textsprite.create("0", 0, 6)
+CookieCounter.setPosition(7, 7)
+CookieCounter.changeScale(1, ScaleAnchor.Middle)
+CookieWorth = 1
+forever(function () {
+    CookieCounter.setText(convertToText(CookieAmount))
+})
