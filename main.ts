@@ -4,6 +4,9 @@ namespace SpriteKind {
     export const Upgrade = SpriteKind.create()
     export const GoldenCookie = SpriteKind.create()
 }
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    CookieAmount += 100 * CookieWorth
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Cursor.overlapsWith(BigCookie)) {
         SelectedCookie = randint(1, RandomCookie)
@@ -51,6 +54,28 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             Cookie.setPosition(randint(10, 150), 0)
             Cookie.vy = 70
         }
+        if (SelectedCookie == 3) {
+            Cookie = sprites.create(img`
+                . . . . . f f f f f f . . . . . 
+                . . . f f 6 6 6 6 6 6 f f . . . 
+                . . f 6 6 6 6 6 d 6 6 6 6 f . . 
+                . f 6 6 d 6 6 6 6 6 6 6 6 6 f . 
+                . f 6 6 6 6 6 6 6 6 6 6 6 6 f . 
+                f 6 6 6 6 6 6 6 6 6 6 d 6 6 6 f 
+                f 6 6 d 6 6 6 d 6 6 6 6 6 6 6 f 
+                f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
+                f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
+                f 6 6 6 d 6 6 6 6 d 6 6 d 6 6 f 
+                f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
+                . f 6 6 6 6 6 6 6 6 6 6 6 6 f . 
+                . f 6 6 6 6 6 d 6 6 6 6 6 6 f . 
+                . . f 6 6 6 6 6 6 6 6 6 6 f . . 
+                . . . f f 6 6 6 6 6 6 f f . . . 
+                . . . . . f f f f f f . . . . . 
+                `, SpriteKind.Projectile)
+            Cookie.setPosition(randint(10, 150), 0)
+            Cookie.vy = 70
+        }
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Milk, function (sprite, otherSprite) {
@@ -73,17 +98,71 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Upgrade, function (sprite, other
     if (controller.A.isPressed()) {
         if (UpgradeNumber == 1) {
             if (CookieAmount > 99) {
+                UpgradeNumber = 2
                 CookieAmount += -100
                 CookieWorth += 1
                 RandomCookie += 1
-                sprites.destroy(otherSprite)
+                animation.runImageAnimation(
+                otherSprite,
+                [img`
+                    6666666666666666666666666666666666666666
+                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                    6eeeeffffeeeeeeddeeddddeeddeeeeeeeeeeee6
+                    6eeef6666feeeedeededeededeedeeeeeeeeeee6
+                    6eef666666feeeeeededeeeedeedeeeeeeeeeee6
+                    6ef66d66d66feeeedeedddeedeedeeeeeeeeeee6
+                    6ef66666666feeeedeeeeededeedeeeeeeeeeee6
+                    6ef6d6666d6feeedeeeeeededeedeeeeeeeeeee6
+                    6ef66666666feeedeeeeeededeedeeeeeeeeeee6
+                    6eef666d66feeedeeeeeeededeedeeeeeeeeeee6
+                    6eeef6666feeeedeeeedeededeedeeeeeeeeeee6
+                    6eeeeffffeeeeeddddeeddeeeddeeeeeeeeeeee6
+                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                    6666666666666666666666666666666666666666
+                    `],
+                0,
+                false
+                )
+            }
+            if (UpgradeNumber == 2) {
+                if (CookieAmount > 249) {
+                    UpgradeNumber = 3
+                    CookieAmount += -250
+                    CookieWorth += 1
+                    RandomCookie += 1
+                    animation.runImageAnimation(
+                    otherSprite,
+                    [img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeddeeeddeeeddeeeddeeeeeeee6
+                        6eeef4444feeeeedeedeededeededeedeeeeeee6
+                        6eef444444feeeedeedeededeededeedeeeeeee6
+                        6ef44444444feeedeedeededeededeedeeeeeee6
+                        6ef44444444feeedeedeededeededeedeeeeeee6
+                        6ef44444444feeedeedeededeededeedeeeeeee6
+                        6ef44444444feeedeedeededeededeedeeeeeee6
+                        6eef444444feeeedeedeededeededeedeeeeeee6
+                        6eeef4444feeeeedeedeededeededeedeeeeeee6
+                        6eeeeffffeeeeedddeeddeeeddeeeddeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `],
+                    0,
+                    false
+                    )
+                }
             }
         }
     }
 })
-let CookieAmount = 0
 let Cookie: Sprite = null
 let SelectedCookie = 0
+let CookieAmount = 0
 let CookieWorth = 0
 let UpgradeNumber = 0
 let RandomCookie = 0
@@ -253,7 +332,7 @@ let Upgrade = sprites.create(img`
     6666666666666666666666666666666666666666
     6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
     6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-    6eeeeffffeeeeeddeeddddeddddeeeeeeeeeeee6
+    6eeeeffffeeeeeddeeeddeeeddeeeeeeeeeeeee6
     6eeefddddfeeeeedeedeededeedeeeeeeeeeeee6
     6eefddddddfeeeedeedeededeedeeeeeeeeeeee6
     6efdd6dd6ddfeeedeedeededeedeeeeeeeeeeee6
@@ -262,7 +341,7 @@ let Upgrade = sprites.create(img`
     6efddddddddfeeedeedeededeedeeeeeeeeeeee6
     6eefddd6ddfeeeedeedeededeedeeeeeeeeeeee6
     6eeefddddfeeeeedeedeededeedeeeeeeeeeeee6
-    6eeeeffffeeeeedddeddddeddddeeeeeeeeeeee6
+    6eeeeffffeeeeedddeeddeeeddeeeeeeeeeeeee6
     6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
     6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
     6666666666666666666666666666666666666666
