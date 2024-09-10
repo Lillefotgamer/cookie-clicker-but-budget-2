@@ -121,6 +121,50 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             Cookie.setPosition(randint(10, 150), 0)
             Cookie.vy = 70
         }
+        if (SelectedCookie == 5) {
+            Cookie = sprites.create(img`
+                . . . . . f f f f f f . . . . . 
+                . . . f f 4 4 4 4 4 4 f f . . . 
+                . . f 4 4 4 4 6 4 4 4 4 4 f . . 
+                . f 4 4 4 4 4 4 4 4 6 6 4 4 f . 
+                . f 4 4 6 6 4 4 6 4 6 6 4 4 f . 
+                f 4 4 4 6 6 4 4 4 4 4 4 4 4 4 f 
+                f 4 6 4 4 4 4 4 4 4 4 4 4 6 4 f 
+                f 4 4 4 4 4 4 4 4 4 6 6 4 4 4 f 
+                f 4 6 4 4 6 4 4 4 4 6 6 4 4 4 f 
+                f 4 4 4 4 4 4 4 4 4 4 4 4 6 4 f 
+                f 4 4 4 4 4 4 4 4 6 4 4 4 4 4 f 
+                . f 4 4 4 6 6 4 4 4 4 4 4 4 f . 
+                . f 4 4 4 6 6 4 4 4 6 4 4 4 f . 
+                . . f 4 4 4 4 4 6 4 4 4 4 f . . 
+                . . . f f 4 4 4 4 4 4 f f . . . 
+                . . . . . f f f f f f . . . . . 
+                `, SpriteKind.Projectile)
+            Cookie.setPosition(randint(10, 150), 0)
+            Cookie.vy = 70
+        }
+        if (SelectedCookie == 5) {
+            Cookie = sprites.create(img`
+                . . . . . f f f f f f . . . . . 
+                . . . f f 4 4 4 4 4 4 f f . . . 
+                . . f 4 4 4 4 6 4 4 4 4 4 f . . 
+                . f 4 4 4 4 4 4 4 4 6 6 4 4 f . 
+                . f 4 4 6 6 4 4 6 4 6 6 4 4 f . 
+                f 4 4 4 6 6 4 4 4 4 4 4 4 4 4 f 
+                f 4 6 4 4 4 4 4 4 4 4 4 4 6 4 f 
+                f 4 4 4 4 4 4 4 4 4 6 6 4 4 4 f 
+                f 4 6 4 4 6 4 4 4 4 6 6 4 4 4 f 
+                f 4 4 4 4 4 4 4 4 4 4 4 4 6 4 f 
+                f 4 4 4 4 4 4 4 4 6 4 4 4 4 4 f 
+                . f 4 4 4 6 6 4 4 4 4 4 4 4 f . 
+                . f 4 4 4 6 6 4 4 4 6 4 4 4 f . 
+                . . f 4 4 4 4 4 6 4 4 4 4 f . . 
+                . . . f f 4 4 4 4 4 4 f f . . . 
+                . . . . . f f f f f f . . . . . 
+                `, SpriteKind.Projectile)
+            Cookie.setPosition(randint(10, 150), 0)
+            Cookie.vy = 70
+        }
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Milk, function (sprite, otherSprite) {
