@@ -4,14 +4,12 @@ namespace SpriteKind {
     export const Upgrade = SpriteKind.create()
     export const GoldenCookie = SpriteKind.create()
     export const CheatMenu = SpriteKind.create()
-    export const CheatMenuCheat = SpriteKind.create()
-    export const CheatMenuCheat2 = SpriteKind.create()
-    export const CheatMenuCheat3 = SpriteKind.create()
+    export const milkglass = SpriteKind.create()
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Cursor.overlapsWith(BigCookie)) {
         SelectedCookie = randint(1, RandomCookie)
-        if (randint(1, 7) == 7) {
+        if (randint(1, 777) == 7) {
             GoldenCookie = sprites.create(img`
                 ......999999......
                 ....99ffffff99....
@@ -226,64 +224,178 @@ sprites.onOverlap(SpriteKind.GoldenCookie, SpriteKind.Player, function (sprite, 
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.CheatMenu, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
-        CheatMenuCheat = sprites.create(img`
-            . . . . . f f f f f f . . . . . 
-            . . . f f 7 7 7 5 7 7 f f . . . 
-            . . f 7 5 7 7 7 f 7 4 4 4 f . . 
-            . f 5 7 f 7 7 7 5 4 4 4 4 4 f . 
-            . f 5 7 5 7 4 4 4 4 4 4 4 4 f . 
-            f 7 5 7 5 4 4 4 4 4 4 6 4 4 4 f 
-            f 7 5 7 4 4 4 6 4 4 4 4 4 4 4 f 
-            f 7 5 4 4 4 4 4 4 4 4 4 4 4 4 f 
-            f 7 5 4 4 4 4 4 4 4 4 4 4 4 4 f 
-            f 7 4 4 6 4 4 4 4 6 4 4 6 4 4 f 
-            f 7 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
-            . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
-            . f 4 4 4 4 4 6 4 4 4 4 4 4 f . 
-            . . f 4 4 4 4 4 4 4 4 4 4 f . . 
-            . . . f f 4 4 4 4 4 4 f f . . . 
-            . . . . . f f f f f f . . . . . 
-            `, SpriteKind.CheatMenuCheat)
-        CheatMenuCheat.setPosition(140, 110)
-        CheatMenuCheat2 = sprites.create(img`
-            . . . . . f f f f f f . . . . . 
-            . . . f f 7 7 7 5 7 7 f f . . . 
-            . . f 7 5 7 7 7 f 7 5 5 5 f . . 
-            . f 5 7 f 7 7 7 5 5 5 5 5 5 f . 
-            . f 5 7 5 7 5 5 5 5 5 5 5 5 f . 
-            f 7 5 7 5 5 5 5 5 5 5 1 5 5 5 f 
-            f 7 5 7 5 5 5 1 5 5 5 5 5 5 5 f 
-            f 7 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
-            f 7 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
-            f 7 5 5 1 5 5 5 5 1 5 5 1 5 5 f 
-            f 7 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
-            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
-            . f 5 5 5 5 5 1 5 5 5 5 5 5 f . 
-            . . f 5 5 5 5 5 5 5 5 5 5 f . . 
-            . . . f f 5 5 5 5 5 5 f f . . . 
-            . . . . . f f f f f f . . . . . 
-            `, SpriteKind.CheatMenuCheat2)
-        CheatMenuCheat2.setPosition(130, 110)
-        CheatMenuCheat3 = sprites.create(img`
-            . . . . . f f f f f f . . . . . 
-            . . . f f 7 7 7 5 7 7 f f . . . 
-            . . f 7 5 7 7 7 f 7 5 5 5 f . . 
-            . f 5 7 f 7 7 7 5 5 5 5 5 5 f . 
-            . f 5 7 5 7 5 5 5 5 5 5 5 5 f . 
-            f 7 5 7 5 5 5 5 5 5 5 1 5 5 5 f 
-            f 7 5 7 5 5 5 1 5 5 5 5 5 5 5 f 
-            f 7 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
-            f 7 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
-            f 7 5 5 1 5 5 5 5 1 5 5 1 5 5 f 
-            f 7 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
-            . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
-            . f 5 5 5 5 5 1 5 5 5 5 5 5 f . 
-            . . f 5 5 5 5 5 5 5 5 5 5 f . . 
-            . . . f f 5 5 5 5 5 5 f f . . . 
-            . . . . . f f f f f f . . . . . 
-            `, SpriteKind.CheatMenuCheat3)
-        CheatMenuCheat3.setPosition(120, 110)
+    if (CheatMenuActivated == 1) {
+        if (controller.B.isPressed()) {
+            pause(500)
+            CheatMenu.close()
+            CheatMenuActivated = 0
+        }
+    }
+    if (CheatMenuActivated == 0) {
+        if (controller.A.isPressed()) {
+            pause(500)
+            CheatMenuActivated = 1
+            CheatMenu = miniMenu.createMenuFromArray([
+            miniMenu.createMenuItem("GoldenCookie", img`
+                . . . . . f f f f f f . . . . . 
+                . . . f f 5 5 5 5 5 5 f f . . . 
+                . . f 5 5 5 5 5 5 5 5 5 5 f . . 
+                . f 5 5 5 5 5 5 1 5 5 5 5 5 f . 
+                . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+                f 5 5 5 5 1 5 5 5 5 1 5 5 5 5 f 
+                f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+                f 5 5 1 5 5 5 5 5 5 5 5 5 5 5 f 
+                f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+                f 5 5 5 5 5 5 1 5 5 5 5 5 5 5 f 
+                f 5 5 5 5 5 5 5 5 5 5 5 5 5 5 f 
+                . f 5 5 5 1 5 5 5 5 1 5 5 5 f . 
+                . f 5 5 5 5 5 5 5 5 5 5 5 5 f . 
+                . . f 5 5 5 5 5 5 5 5 5 5 f . . 
+                . . . f f 5 5 5 5 5 5 f f . . . 
+                . . . . . f f f f f f . . . . . 
+                `),
+            miniMenu.createMenuItem("+1KCookies", img`
+                . . . . . c c c c c c . . . . . 
+                . . . c c f f f f f f c c . . . 
+                . . c f f f f f f f f f f c . . 
+                . c f f f f f f f f f f f f c . 
+                . c f f f 1 1 f 1 f f f 1 f c . 
+                c f f f f f 1 f 1 f f 1 f f f c 
+                c f f f f f 1 f 1 f 1 f f f f c 
+                c f f 1 f f 1 f 1 1 1 f f f f c 
+                c f 1 1 1 f 1 f 1 1 1 f f f f c 
+                c f f 1 f f 1 f 1 f 1 f f f f c 
+                c f f f f f 1 f 1 f f 1 f f f c 
+                . c f f f f 1 f 1 f f f 1 f c . 
+                . c f f f f f f f f f f f f c . 
+                . . c f f f f f f f f f f c . . 
+                . . . c c f f f f f f c c . . . 
+                . . . . . c c c c c c . . . . . 
+                `),
+            miniMenu.createMenuItem("0Cookies", img`
+                . . . . . c c c c c c . . . . . 
+                . . . c c f f f f f f c c . . . 
+                . . c f f f f f f f f f f c . . 
+                . c f f f f 1 1 1 1 f f f f c . 
+                . c f f f 1 1 f f 1 1 f f f c . 
+                c f f f f 1 f f f f 1 f f f f c 
+                c f f f f 1 f f f f 1 f f f f c 
+                c f f f f 1 f f f f 1 f f f f c 
+                c f f f f 1 f f f f 1 f f f f c 
+                c f f f f 1 f f f f 1 f f f f c 
+                c f f f f 1 f f f f 1 f f f f c 
+                . c f f f 1 1 f f 1 1 f f f c . 
+                . c f f f f 1 1 1 1 f f f f c . 
+                . . c f f f f f f f f f f c . . 
+                . . . c c f f f f f f c c . . . 
+                . . . . . c c c c c c . . . . . 
+                `),
+            miniMenu.createMenuItem("Wipe", img`
+                . . . . f f f . . . . 
+                . . f f 1 d d f f . . 
+                . f 1 1 1 1 d d d f . 
+                . f 1 1 1 1 1 1 d f . 
+                f 1 1 f f 1 f f d d f 
+                f 1 f f f 1 f f f d f 
+                f 1 f f f 1 f f f d f 
+                f 1 1 1 1 1 1 1 1 d f 
+                f 1 1 1 1 f 1 d d d f 
+                . f f 1 1 1 1 d f f . 
+                . . . f 1 f 1 f . . . 
+                . . . f f f f f . . . 
+                `),
+            miniMenu.createMenuItem("Milk", img`
+                d . . . . . . d 
+                d 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 d 
+                d 1 1 1 1 1 1 d 
+                d d d d d d d d 
+                `)
+            ])
+            CheatMenu.setTitle("Cheats")
+            CheatMenu.setFrame(img`
+                . . . . . . . . . . . . . . . 
+                . . 6 6 6 6 6 6 6 6 6 6 6 . . 
+                . 6 6 6 6 6 6 6 6 6 6 6 6 6 . 
+                . 6 6 6 6 6 6 6 6 6 6 6 6 6 . 
+                . 6 6 6 6 d d d d d 6 6 6 6 . 
+                . 6 6 6 d d d d d d d 6 6 6 . 
+                . 6 6 6 d d d d d d d 6 6 6 . 
+                . 6 6 6 d d d d d d d 6 6 6 . 
+                . 6 6 6 d d d d d d d 6 6 6 . 
+                . 6 6 6 d d d d d d d 6 6 6 . 
+                . 6 6 6 6 d d d d d 6 6 6 6 . 
+                . 6 6 6 6 6 6 6 6 6 6 6 6 6 . 
+                . 6 6 6 6 6 6 6 6 6 6 6 6 6 . 
+                . . 6 6 6 6 6 6 6 6 6 6 6 . . 
+                . . . . . . . . . . . . . . . 
+                `)
+            CheatMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
+                if (selectedIndex == 0) {
+                    GoldenCookie = sprites.create(img`
+                        ......999999......
+                        ....99ffffff99....
+                        ...9ff555555ff9...
+                        ..9f5555515555f9..
+                        .9f551555555555f9.
+                        .9f555555555555f9.
+                        9f55555555551555f9
+                        9f55155515555555f9
+                        9f55555555555555f9
+                        9f55555555555555f9
+                        9f55515555155155f9
+                        9f55555555555555f9
+                        .9f555555555555f9.
+                        .9f555551555555f9.
+                        ..9f5555555555f9..
+                        ...9ff555555ff9...
+                        ....99ffffff99....
+                        ......999999......
+                        `, SpriteKind.GoldenCookie)
+                    GoldenCookie.setPosition(randint(10, 150), 0)
+                    GoldenCookie.vy = 70
+                }
+                if (selectedIndex == 1) {
+                    CookieAmount += 1000
+                } else if (selectedIndex == 2) {
+                    CookieAmount = 0
+                } else if (selectedIndex == 3) {
+                    game.reset()
+                } else if (selectedIndex == 4) {
+                    Cookie = sprites.create(img`
+                        d . . . . . . d 
+                        d 1 1 1 1 1 1 d 
+                        d 1 1 1 1 1 1 d 
+                        d 1 1 1 1 1 1 d 
+                        d 1 1 1 1 1 1 d 
+                        d 1 1 1 1 1 1 d 
+                        d 1 1 1 1 1 1 d 
+                        d 1 1 1 1 1 1 d 
+                        d 1 1 1 1 1 1 d 
+                        d 1 1 1 1 1 1 d 
+                        d 1 1 1 1 1 1 d 
+                        d 1 1 1 1 1 1 d 
+                        d 1 1 1 1 1 1 d 
+                        d 1 1 1 1 1 1 d 
+                        d 1 1 1 1 1 1 d 
+                        d d d d d d d d 
+                        `, SpriteKind.milkglass)
+                    Cookie.setPosition(randint(10, 150), 0)
+                    Cookie.vy = 70
+                }
+            })
+        }
     }
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Milk, function (sprite, otherSprite) {
@@ -449,6 +561,12 @@ sprites.onOverlap(SpriteKind.GoldenCookie, SpriteKind.Milk, function (sprite, ot
     CookieAmount += 7 * CookieWorth
     sprites.destroy(sprite)
 })
+sprites.onOverlap(SpriteKind.milkglass, SpriteKind.Milk, function (sprite, otherSprite) {
+    if (Milk.y > 60) {
+        otherSprite.y += -1
+    }
+    sprites.destroy(sprite)
+})
 controller.combos.attachCombo("AABBABAA", function () {
     CheatMenuIcon = sprites.create(img`
         . . . . . f f f f f f . . . . . 
@@ -471,9 +589,8 @@ controller.combos.attachCombo("AABBABAA", function () {
     CheatMenuIcon.setPosition(150, 110)
 })
 let CheatMenuIcon: Sprite = null
-let CheatMenuCheat3: Sprite = null
-let CheatMenuCheat2: Sprite = null
-let CheatMenuCheat: Sprite = null
+let CheatMenu: miniMenu.MenuSprite = null
+let CheatMenuActivated = 0
 let CookieAmount = 0
 let Cookie: Sprite = null
 let GoldenCookie: Sprite = null
