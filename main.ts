@@ -5,264 +5,416 @@ namespace SpriteKind {
     export const GoldenCookie = SpriteKind.create()
     export const CheatMenu = SpriteKind.create()
     export const milkglass = SpriteKind.create()
+    export const BuyKid = SpriteKind.create()
+    export const BuyPlant = SpriteKind.create()
+    export const BuyFactory = SpriteKind.create()
+    export const CookieBank = SpriteKind.create()
+    export const CookieHacking = SpriteKind.create()
+    export const InAnimation = SpriteKind.create()
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.BuyPlant, function (sprite, otherSprite) {
+    if (controller.A.isPressed()) {
+        if (CookieAmount > 999) {
+            PlantAmount += 1
+            CookieAmount += -1000
+        }
+    }
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (Cursor.overlapsWith(BigCookie)) {
-        SelectedCookie = randint(1, RandomCookie)
-        if (randint(1, 777) == 7) {
-            GoldenCookie = sprites.create(img`
-                ......999999......
-                ....99ffffff99....
-                ...9ff555555ff9...
-                ..9f5555515555f9..
-                .9f551555555555f9.
-                .9f555555555555f9.
-                9f55555555551555f9
-                9f55155515555555f9
-                9f55555555555555f9
-                9f55555555555555f9
-                9f55515555155155f9
-                9f55555555555555f9
-                .9f555555555555f9.
-                .9f555551555555f9.
-                ..9f5555555555f9..
-                ...9ff555555ff9...
-                ....99ffffff99....
-                ......999999......
-                `, SpriteKind.GoldenCookie)
-            GoldenCookie.setPosition(randint(10, 150), 0)
-            GoldenCookie.vy = 70
-        }
-        if (SelectedCookie == 1) {
-            Cookie = sprites.create(img`
-                . . . . . f f f f f f . . . . . 
-                . . . f f 4 4 4 4 4 4 f f . . . 
-                . . f 4 4 4 4 4 6 4 4 4 4 f . . 
-                . f 4 4 6 4 4 4 4 4 4 4 4 4 f . 
-                . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
-                f 4 4 4 4 4 4 4 4 4 4 6 4 4 4 f 
-                f 4 4 6 4 4 4 6 4 4 4 4 4 4 4 f 
-                f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
-                f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
-                f 4 4 4 6 4 4 4 4 6 4 4 6 4 4 f 
-                f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
-                . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
-                . f 4 4 4 4 4 6 4 4 4 4 4 4 f . 
-                . . f 4 4 4 4 4 4 4 4 4 4 f . . 
-                . . . f f 4 4 4 4 4 4 f f . . . 
-                . . . . . f f f f f f . . . . . 
-                `, SpriteKind.Projectile)
-            Cookie.setPosition(randint(10, 150), 0)
-            Cookie.vy = 70
-        }
-        if (SelectedCookie == 2) {
-            Cookie = sprites.create(img`
-                . . . . . f f f f f f . . . . . 
-                . . . f f d d d d d d f f . . . 
-                . . f d d d d d 6 d d d d f . . 
-                . f d d 6 d d d d d d d d d f . 
-                . f d d d d d d d d d d d d f . 
-                f d d d d d d d d d d 6 d d d f 
-                f d d 6 d d d 6 d d d d d d d f 
-                f d d d d d d d d d d d d d d f 
-                f d d d d d d d d d d d d d d f 
-                f d d d 6 d d d d 6 d d 6 d d f 
-                f d d d d d d d d d d d d d d f 
-                . f d d d d d d d d d d d d f . 
-                . f d d d d d 6 d d d d d d f . 
-                . . f d d d d d d d d d d f . . 
-                . . . f f d d d d d d f f . . . 
-                . . . . . f f f f f f . . . . . 
-                `, SpriteKind.Projectile)
-            Cookie.setPosition(randint(10, 150), 0)
-            Cookie.vy = 70
-        }
-        if (SelectedCookie == 3) {
-            Cookie = sprites.create(img`
-                . . . . . f f f f f f . . . . . 
-                . . . f f 6 6 6 6 6 6 f f . . . 
-                . . f 6 6 6 6 6 d 6 6 6 6 f . . 
-                . f 6 6 d 6 6 6 6 6 6 6 6 6 f . 
-                . f 6 6 6 6 6 6 6 6 6 6 6 6 f . 
-                f 6 6 6 6 6 6 6 6 6 6 d 6 6 6 f 
-                f 6 6 d 6 6 6 d 6 6 6 6 6 6 6 f 
-                f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
-                f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
-                f 6 6 6 d 6 6 6 6 d 6 6 d 6 6 f 
-                f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
-                . f 6 6 6 6 6 6 6 6 6 6 6 6 f . 
-                . f 6 6 6 6 6 d 6 6 6 6 6 6 f . 
-                . . f 6 6 6 6 6 6 6 6 6 6 f . . 
-                . . . f f 6 6 6 6 6 6 f f . . . 
-                . . . . . f f f f f f . . . . . 
-                `, SpriteKind.Projectile)
-            Cookie.setPosition(randint(10, 150), 0)
-            Cookie.vy = 70
-        }
-        if (SelectedCookie == 4) {
-            Cookie = sprites.create(img`
-                . . . . . f f f f f f . . . . . 
-                . . . f f 4 4 4 4 4 4 f f . . . 
-                . . f 4 4 4 4 4 4 4 4 4 4 f . . 
-                . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
-                . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
-                f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
-                f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
-                f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
-                f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
-                f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
-                f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
-                . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
-                . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
-                . . f 4 4 4 4 4 4 4 4 4 4 f . . 
-                . . . f f 4 4 4 4 4 4 f f . . . 
-                . . . . . f f f f f f . . . . . 
-                `, SpriteKind.Projectile)
-            Cookie.setPosition(randint(10, 150), 0)
-            Cookie.vy = 70
-        }
-        if (SelectedCookie == 5) {
-            Cookie = sprites.create(img`
-                . . . . . f f f f f f . . . . . 
-                . . . f f 4 4 4 4 4 4 f f . . . 
-                . . f 4 4 4 4 6 4 4 4 4 4 f . . 
-                . f 4 4 4 4 4 4 4 4 6 6 4 4 f . 
-                . f 4 4 6 6 4 4 6 4 6 6 4 4 f . 
-                f 4 4 4 6 6 4 4 4 4 4 4 4 4 4 f 
-                f 4 6 4 4 4 4 4 4 4 4 4 4 6 4 f 
-                f 4 4 4 4 4 4 4 4 4 6 6 4 4 4 f 
-                f 4 6 4 4 6 4 4 4 4 6 6 4 4 4 f 
-                f 4 4 4 4 4 4 4 4 4 4 4 4 6 4 f 
-                f 4 4 4 4 4 4 4 4 6 4 4 4 4 4 f 
-                . f 4 4 4 6 6 4 4 4 4 4 4 4 f . 
-                . f 4 4 4 6 6 4 4 4 6 4 4 4 f . 
-                . . f 4 4 4 4 4 6 4 4 4 4 f . . 
-                . . . f f 4 4 4 4 4 4 f f . . . 
-                . . . . . f f f f f f . . . . . 
-                `, SpriteKind.Projectile)
-            Cookie.setPosition(randint(10, 150), 0)
-            Cookie.vy = 70
-        }
-        if (SelectedCookie == 5) {
-            Cookie = sprites.create(img`
-                . . . . . f f f f f f . . . . . 
-                . . . f f 4 4 4 4 4 4 f f . . . 
-                . . f 4 4 4 4 6 4 4 4 4 4 f . . 
-                . f 4 4 4 4 4 4 4 4 6 6 4 4 f . 
-                . f 4 4 6 6 4 4 6 4 6 6 4 4 f . 
-                f 4 4 4 6 6 4 4 4 4 4 4 4 4 4 f 
-                f 4 6 4 4 4 4 4 4 4 4 4 4 6 4 f 
-                f 4 4 4 4 4 4 4 4 4 6 6 4 4 4 f 
-                f 4 6 4 4 6 4 4 4 4 6 6 4 4 4 f 
-                f 4 4 4 4 4 4 4 4 4 4 4 4 6 4 f 
-                f 4 4 4 4 4 4 4 4 6 4 4 4 4 4 f 
-                . f 4 4 4 6 6 4 4 4 4 4 4 4 f . 
-                . f 4 4 4 6 6 4 4 4 6 4 4 4 f . 
-                . . f 4 4 4 4 4 6 4 4 4 4 f . . 
-                . . . f f 4 4 4 4 4 4 f f . . . 
-                . . . . . f f f f f f . . . . . 
-                `, SpriteKind.Projectile)
-            Cookie.setPosition(randint(10, 150), 0)
-            Cookie.vy = 70
+    if (GameStarted == 1) {
+        if (Cursor.overlapsWith(BigCookie)) {
+            animation.runImageAnimation(
+            BigCookie,
+            [img`
+                ......ffffff......
+                ....ff444444ff....
+                ...f4444444444f...
+                ..f444444644444f..
+                .f44464444444444f.
+                .f44444444444444f.
+                f4444444444464444f
+                f4446444644444444f
+                f4444444444444444f
+                f4444444444444444f
+                f4444644446446444f
+                f4444444444444444f
+                .f44444444444444f.
+                .f44444464444444f.
+                ..f444444444444f..
+                ...f4444444444f...
+                ....ff444444ff....
+                ......ffffff......
+                `,img`
+                ..................
+                ......ffffff......
+                ....ff444444ff....
+                ...f4444464444f...
+                ..f446444444444f..
+                ..f444444444444f..
+                .f44444444446444f.
+                .f44644464444444f.
+                .f44444444444444f.
+                .f44444444444444f.
+                .f44464444644644f.
+                .f44444444444444f.
+                ..f444444444444f..
+                ..f444446444444f..
+                ...f4444444444f...
+                ....ff444444ff....
+                ......ffffff......
+                ..................
+                `],
+            100,
+            false
+            )
+            SelectedCookie = randint(1, RandomCookie)
+            if (randint(1, 777) == 7) {
+                GoldenCookie = sprites.create(img`
+                    ......999999......
+                    ....99ffffff99....
+                    ...9ff555555ff9...
+                    ..9f5555515555f9..
+                    .9f551555555555f9.
+                    .9f555555555555f9.
+                    9f55555555551555f9
+                    9f55155515555555f9
+                    9f55555555555555f9
+                    9f55555555555555f9
+                    9f55515555155155f9
+                    9f55555555555555f9
+                    .9f555555555555f9.
+                    .9f555551555555f9.
+                    ..9f5555555555f9..
+                    ...9ff555555ff9...
+                    ....99ffffff99....
+                    ......999999......
+                    `, SpriteKind.GoldenCookie)
+                GoldenCookie.setPosition(randint(10, 150), 0)
+                GoldenCookie.vy = 70
+            }
+            if (SelectedCookie == 1) {
+                Cookie = sprites.create(img`
+                    . . . . . f f f f f f . . . . . 
+                    . . . f f 4 4 4 4 4 4 f f . . . 
+                    . . f 4 4 4 4 4 6 4 4 4 4 f . . 
+                    . f 4 4 6 4 4 4 4 4 4 4 4 4 f . 
+                    . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
+                    f 4 4 4 4 4 4 4 4 4 4 6 4 4 4 f 
+                    f 4 4 6 4 4 4 6 4 4 4 4 4 4 4 f 
+                    f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
+                    f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
+                    f 4 4 4 6 4 4 4 4 6 4 4 6 4 4 f 
+                    f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
+                    . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
+                    . f 4 4 4 4 4 6 4 4 4 4 4 4 f . 
+                    . . f 4 4 4 4 4 4 4 4 4 4 f . . 
+                    . . . f f 4 4 4 4 4 4 f f . . . 
+                    . . . . . f f f f f f . . . . . 
+                    `, SpriteKind.Projectile)
+                Cookie.setPosition(randint(10, 150), 0)
+                Cookie.vy = 70
+            }
+            if (SelectedCookie == 2) {
+                Cookie = sprites.create(img`
+                    . . . . . f f f f f f . . . . . 
+                    . . . f f d d d d d d f f . . . 
+                    . . f d d d d d 6 d d d d f . . 
+                    . f d d 6 d d d d d d d d d f . 
+                    . f d d d d d d d d d d d d f . 
+                    f d d d d d d d d d d 6 d d d f 
+                    f d d 6 d d d 6 d d d d d d d f 
+                    f d d d d d d d d d d d d d d f 
+                    f d d d d d d d d d d d d d d f 
+                    f d d d 6 d d d d 6 d d 6 d d f 
+                    f d d d d d d d d d d d d d d f 
+                    . f d d d d d d d d d d d d f . 
+                    . f d d d d d 6 d d d d d d f . 
+                    . . f d d d d d d d d d d f . . 
+                    . . . f f d d d d d d f f . . . 
+                    . . . . . f f f f f f . . . . . 
+                    `, SpriteKind.Projectile)
+                Cookie.setPosition(randint(10, 150), 0)
+                Cookie.vy = 70
+            }
+            if (SelectedCookie == 3) {
+                Cookie = sprites.create(img`
+                    . . . . . f f f f f f . . . . . 
+                    . . . f f 6 6 6 6 6 6 f f . . . 
+                    . . f 6 6 6 6 6 d 6 6 6 6 f . . 
+                    . f 6 6 d 6 6 6 6 6 6 6 6 6 f . 
+                    . f 6 6 6 6 6 6 6 6 6 6 6 6 f . 
+                    f 6 6 6 6 6 6 6 6 6 6 d 6 6 6 f 
+                    f 6 6 d 6 6 6 d 6 6 6 6 6 6 6 f 
+                    f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
+                    f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
+                    f 6 6 6 d 6 6 6 6 d 6 6 d 6 6 f 
+                    f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
+                    . f 6 6 6 6 6 6 6 6 6 6 6 6 f . 
+                    . f 6 6 6 6 6 d 6 6 6 6 6 6 f . 
+                    . . f 6 6 6 6 6 6 6 6 6 6 f . . 
+                    . . . f f 6 6 6 6 6 6 f f . . . 
+                    . . . . . f f f f f f . . . . . 
+                    `, SpriteKind.Projectile)
+                Cookie.setPosition(randint(10, 150), 0)
+                Cookie.vy = 70
+            }
+            if (SelectedCookie == 4) {
+                Cookie = sprites.create(img`
+                    . . . . . f f f f f f . . . . . 
+                    . . . f f 4 4 4 4 4 4 f f . . . 
+                    . . f 4 4 4 4 4 4 4 4 4 4 f . . 
+                    . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
+                    . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
+                    f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
+                    f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
+                    f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
+                    f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
+                    f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
+                    f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
+                    . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
+                    . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
+                    . . f 4 4 4 4 4 4 4 4 4 4 f . . 
+                    . . . f f 4 4 4 4 4 4 f f . . . 
+                    . . . . . f f f f f f . . . . . 
+                    `, SpriteKind.Projectile)
+                Cookie.setPosition(randint(10, 150), 0)
+                Cookie.vy = 70
+            }
+            if (SelectedCookie == 5) {
+                Cookie = sprites.create(img`
+                    . . . . . f f f f f f . . . . . 
+                    . . . f f 4 4 4 4 4 4 f f . . . 
+                    . . f 4 4 4 4 6 4 4 4 4 4 f . . 
+                    . f 4 4 4 4 4 4 4 4 6 6 4 4 f . 
+                    . f 4 4 6 6 4 4 6 4 6 6 4 4 f . 
+                    f 4 4 4 6 6 4 4 4 4 4 4 4 4 4 f 
+                    f 4 6 4 4 4 4 4 4 4 4 4 4 6 4 f 
+                    f 4 4 4 4 4 4 4 4 4 6 6 4 4 4 f 
+                    f 4 6 4 4 6 4 4 4 4 6 6 4 4 4 f 
+                    f 4 4 4 4 4 4 4 4 4 4 4 4 6 4 f 
+                    f 4 4 4 4 4 4 4 4 6 4 4 4 4 4 f 
+                    . f 4 4 4 6 6 4 4 4 4 4 4 4 f . 
+                    . f 4 4 4 6 6 4 4 4 6 4 4 4 f . 
+                    . . f 4 4 4 4 4 6 4 4 4 4 f . . 
+                    . . . f f 4 4 4 4 4 4 f f . . . 
+                    . . . . . f f f f f f . . . . . 
+                    `, SpriteKind.Projectile)
+                Cookie.setPosition(randint(10, 150), 0)
+                Cookie.vy = 70
+            }
+            if (SelectedCookie == 6) {
+                Cookie = sprites.create(img`
+                    . . f f f f f f f f f f f f . . 
+                    . f d d d d d d 6 6 6 6 6 6 f . 
+                    f d d d d d d d 6 6 6 6 6 6 6 f 
+                    f d d d d d d d 6 6 6 6 6 6 6 f 
+                    f d d d d d d d 6 6 6 6 6 6 6 f 
+                    f d d d d d d d 6 6 6 6 6 6 6 f 
+                    f d d d d d d d 6 6 6 6 6 6 6 f 
+                    f d d d d d d d 6 6 6 6 6 6 6 f 
+                    f 6 6 6 6 6 6 6 d d d d d d d f 
+                    f 6 6 6 6 6 6 6 d d d d d d d f 
+                    f 6 6 6 6 6 6 6 d d d d d d d f 
+                    f 6 6 6 6 6 6 6 d d d d d d d f 
+                    f 6 6 6 6 6 6 6 d d d d d d d f 
+                    f 6 6 6 6 6 6 6 d d d d d d d f 
+                    . f 6 6 6 6 6 6 d d d d d d f . 
+                    . . f f f f f f f f f f f f . . 
+                    `, SpriteKind.Projectile)
+                Cookie.setPosition(randint(10, 150), 0)
+                Cookie.vy = 70
+            }
+            if (SelectedCookie == 7) {
+                Cookie = sprites.create(img`
+                    . . . . . f f f f f f . . . . . 
+                    . . . f f e 6 e e 6 e f f . . . 
+                    . . f 6 e e 6 e e 6 e e 6 f . . 
+                    . f 6 6 6 6 6 6 6 6 6 6 6 6 f . 
+                    . f e 6 e e 6 e e 6 e e 6 e f . 
+                    f e e 6 e e 6 e e 6 e e 6 e e f 
+                    f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
+                    f e e 6 e e 6 e e 6 e e 6 e e f 
+                    f e e 6 e e 6 e e 6 e e 6 e e f 
+                    f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
+                    f e e 6 e e 6 e e 6 e e 6 e e f 
+                    . f e 6 e e 6 e e 6 e e 6 e f . 
+                    . f 6 6 6 6 6 6 6 6 6 6 6 6 f . 
+                    . . f 6 e e 6 e e 6 e e 6 f . . 
+                    . . . f f e 6 e e 6 e f f . . . 
+                    . . . . . f f f f f f . . . . . 
+                    `, SpriteKind.Projectile)
+                Cookie.setPosition(randint(10, 150), 0)
+                Cookie.vy = 70
+            }
+            if (SelectedCookie == 8) {
+                Cookie = sprites.create(img`
+                    . . . . . f f f f f f . . . . . 
+                    . . . f f 4 4 4 4 4 4 f f . . . 
+                    . . f 4 4 e 4 e 4 e 4 4 4 f . . 
+                    . f 4 4 e 4 e 4 e 4 e 4 4 4 f . 
+                    . f 4 e 4 e 4 e 4 e 4 e 4 4 f . 
+                    f 4 e 4 e 4 e 4 e 4 e 4 e 4 4 f 
+                    f 4 4 e 4 e 4 e 4 e 4 e 4 e 4 f 
+                    f 4 e 4 e 4 e 4 e 4 e 4 e 4 4 f 
+                    f 4 4 e 4 e 4 e 4 e 4 e 4 e 4 f 
+                    f 4 e 4 e 4 e 4 e 4 e 4 e 4 4 f 
+                    f 4 4 e 4 e 4 e 4 e 4 e 4 e 4 f 
+                    . f 4 4 e 4 e 4 e 4 e 4 e 4 f . 
+                    . f 4 4 4 e 4 e 4 e 4 e 4 4 f . 
+                    . . f 4 4 4 e 4 e 4 e 4 4 f . . 
+                    . . . f f 4 4 4 4 4 4 f f . . . 
+                    . . . . . f f f f f f . . . . . 
+                    `, SpriteKind.Projectile)
+                Cookie.setPosition(randint(10, 150), 0)
+                Cookie.vy = 70
+            }
+            if (SelectedCookie == 9) {
+                Cookie = sprites.create(img`
+                    . . . . . f f f f f f . . . . . 
+                    . . . f f 4 4 4 4 4 4 f f . . . 
+                    . . f 4 4 4 4 4 6 4 4 4 4 f . . 
+                    . f 4 4 6 4 4 4 4 4 4 4 4 4 f . 
+                    . f 4 4 4 4 4 4 4 4 4 6 4 4 f . 
+                    f 4 4 4 4 4 4 f f 4 4 4 4 4 4 f 
+                    f 4 4 4 4 4 f . . f 4 4 4 4 4 f 
+                    f 4 4 4 4 f . . . . f 4 4 4 4 f 
+                    f 4 4 4 4 f . . . . f 4 4 4 4 f 
+                    f 4 4 4 4 4 f . . f 4 4 4 6 4 f 
+                    f 4 4 6 4 4 4 f f 4 4 4 4 4 4 f 
+                    . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
+                    . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
+                    . . f 4 4 4 4 4 6 4 4 4 4 f . . 
+                    . . . f f 4 4 4 4 4 4 f f . . . 
+                    . . . . . f f f f f f . . . . . 
+                    `, SpriteKind.Projectile)
+                Cookie.setPosition(randint(10, 150), 0)
+                Cookie.vy = 70
+            }
+            if (SelectedCookie == 10) {
+                Cookie = sprites.create(img`
+                    . . . . . . . f f f . . . . . . . 
+                    . . . . . f f e e e f f . . . . . 
+                    . . . f f e e e e e e e f f . . . 
+                    . f f 4 4 4 4 6 4 e e e 4 4 f f . 
+                    f e e e 4 4 4 4 4 6 4 4 4 e e e f 
+                    f 4 4 4 e e 4 4 4 4 4 e e 4 4 4 f 
+                    f 4 4 4 4 4 e e 4 e e 4 4 4 4 e f 
+                    f 4 6 4 4 4 4 4 e 4 4 4 6 4 e e f 
+                    f 4 4 4 4 4 4 4 e 4 4 4 4 4 e e f 
+                    f 4 4 4 4 4 6 4 e 4 4 4 4 e e e f 
+                    f 4 4 4 6 4 4 4 e 4 6 4 4 e 6 e f 
+                    f 4 4 4 4 4 4 4 e 4 4 4 e e e e f 
+                    . f f 4 4 4 4 4 e 4 4 e e e f f . 
+                    . . . f f 4 4 4 e 4 4 e f f . . . 
+                    . . . . . f f 4 e 4 f f . . . . . 
+                    . . . . . . . f f f . . . . . . . 
+                    `, SpriteKind.Projectile)
+                Cookie.setPosition(randint(10, 150), 0)
+                Cookie.vy = 70
+            }
         }
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Milk, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
-        if (controller.up.isPressed()) {
-            if (Milk.y > 60) {
-                Milk.y += -1
-                timer.after(5000, function () {
-                    Milk.y += 1
-                })
+    if (GameStarted == 1) {
+        if (controller.A.isPressed()) {
+            if (controller.up.isPressed()) {
+                if (Milk.y > 60) {
+                    Milk.y += -1
+                    timer.after(5000, function () {
+                        Milk.y += 1
+                    })
+                }
             }
         }
     }
 })
 sprites.onOverlap(SpriteKind.GoldenCookie, SpriteKind.Player, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
-        sprites.destroy(sprite)
-        if (Math.percentChance(50)) {
-            CookieAmount += 100
-        } else if (Math.percentChance(75)) {
-            CookieAmount += 500
-        } else if (Math.percentChance(50)) {
-            CookieAmount += 1000
-            for (let index = 0; index < 2; index++) {
-                GoldenCookie = sprites.create(img`
-                    ......999999......
-                    ....99ffffff99....
-                    ...9ff555555ff9...
-                    ..9f5555515555f9..
-                    .9f551555555555f9.
-                    .9f555555555555f9.
-                    9f55555555551555f9
-                    9f55155515555555f9
-                    9f55555555555555f9
-                    9f55555555555555f9
-                    9f55515555155155f9
-                    9f55555555555555f9
-                    .9f555555555555f9.
-                    .9f555551555555f9.
-                    ..9f5555555555f9..
-                    ...9ff555555ff9...
-                    ....99ffffff99....
-                    ......999999......
-                    `, SpriteKind.GoldenCookie)
-                GoldenCookie.setPosition(randint(10, 150), 0)
-                GoldenCookie.vy = 70
-            }
-        } else if (Math.percentChance(75)) {
-            CookieAmount += 2500
-            for (let index = 0; index < 3; index++) {
-                GoldenCookie = sprites.create(img`
-                    ......999999......
-                    ....99ffffff99....
-                    ...9ff555555ff9...
-                    ..9f5555515555f9..
-                    .9f551555555555f9.
-                    .9f555555555555f9.
-                    9f55555555551555f9
-                    9f55155515555555f9
-                    9f55555555555555f9
-                    9f55555555555555f9
-                    9f55515555155155f9
-                    9f55555555555555f9
-                    .9f555555555555f9.
-                    .9f555551555555f9.
-                    ..9f5555555555f9..
-                    ...9ff555555ff9...
-                    ....99ffffff99....
-                    ......999999......
-                    `, SpriteKind.GoldenCookie)
-                GoldenCookie.setPosition(randint(10, 150), 0)
-                GoldenCookie.vy = 70
-            }
-        } else {
-            CookieAmount += 7770
-            for (let index = 0; index < 4; index++) {
-                GoldenCookie = sprites.create(img`
-                    ......999999......
-                    ....99ffffff99....
-                    ...9ff555555ff9...
-                    ..9f5555515555f9..
-                    .9f551555555555f9.
-                    .9f555555555555f9.
-                    9f55555555551555f9
-                    9f55155515555555f9
-                    9f55555555555555f9
-                    9f55555555555555f9
-                    9f55515555155155f9
-                    9f55555555555555f9
-                    .9f555555555555f9.
-                    .9f555551555555f9.
-                    ..9f5555555555f9..
-                    ...9ff555555ff9...
-                    ....99ffffff99....
-                    ......999999......
-                    `, SpriteKind.GoldenCookie)
-                GoldenCookie.setPosition(randint(10, 150), 0)
-                GoldenCookie.vy = 70
+    if (GameStarted == 1) {
+        if (controller.A.isPressed()) {
+            sprites.destroy(sprite)
+            if (Math.percentChance(50)) {
+                CookieAmount += 100
+            } else if (Math.percentChance(75)) {
+                CookieAmount += 500
+            } else if (Math.percentChance(50)) {
+                CookieAmount += 1000
+                for (let index = 0; index < 2; index++) {
+                    GoldenCookie = sprites.create(img`
+                        ......999999......
+                        ....99ffffff99....
+                        ...9ff555555ff9...
+                        ..9f5555515555f9..
+                        .9f551555555555f9.
+                        .9f555555555555f9.
+                        9f55555555551555f9
+                        9f55155515555555f9
+                        9f55555555555555f9
+                        9f55555555555555f9
+                        9f55515555155155f9
+                        9f55555555555555f9
+                        .9f555555555555f9.
+                        .9f555551555555f9.
+                        ..9f5555555555f9..
+                        ...9ff555555ff9...
+                        ....99ffffff99....
+                        ......999999......
+                        `, SpriteKind.GoldenCookie)
+                    GoldenCookie.setPosition(randint(10, 150), 0)
+                    GoldenCookie.vy = 70
+                }
+            } else if (Math.percentChance(75)) {
+                CookieAmount += 2500
+                for (let index = 0; index < 3; index++) {
+                    GoldenCookie = sprites.create(img`
+                        ......999999......
+                        ....99ffffff99....
+                        ...9ff555555ff9...
+                        ..9f5555515555f9..
+                        .9f551555555555f9.
+                        .9f555555555555f9.
+                        9f55555555551555f9
+                        9f55155515555555f9
+                        9f55555555555555f9
+                        9f55555555555555f9
+                        9f55515555155155f9
+                        9f55555555555555f9
+                        .9f555555555555f9.
+                        .9f555551555555f9.
+                        ..9f5555555555f9..
+                        ...9ff555555ff9...
+                        ....99ffffff99....
+                        ......999999......
+                        `, SpriteKind.GoldenCookie)
+                    GoldenCookie.setPosition(randint(10, 150), 0)
+                    GoldenCookie.vy = 70
+                }
+            } else {
+                CookieAmount += 7770
+                for (let index = 0; index < 4; index++) {
+                    GoldenCookie = sprites.create(img`
+                        ......999999......
+                        ....99ffffff99....
+                        ...9ff555555ff9...
+                        ..9f5555515555f9..
+                        .9f551555555555f9.
+                        .9f555555555555f9.
+                        9f55555555551555f9
+                        9f55155515555555f9
+                        9f55555555555555f9
+                        9f55555555555555f9
+                        9f55515555155155f9
+                        9f55555555555555f9
+                        .9f555555555555f9.
+                        .9f555551555555f9.
+                        ..9f5555555555f9..
+                        ...9ff555555ff9...
+                        ....99ffffff99....
+                        ......999999......
+                        `, SpriteKind.GoldenCookie)
+                    GoldenCookie.setPosition(randint(10, 150), 0)
+                    GoldenCookie.vy = 70
+                }
             }
         }
     }
@@ -443,167 +595,763 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.CheatMenu, function (sprite, oth
     }
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Milk, function (sprite, otherSprite) {
+    sprite.setKind(SpriteKind.InAnimation)
     CookieAmount += 1 * CookieWorth
-    sprites.destroy(sprite)
+    sprite.vy = 0
+    sprite.y += 5
+    animation.runImageAnimation(
+    sprite,
+    [img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . 1 1 . . . 
+        1 1 1 1 1 1 1 1 
+        `,img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . 1 1 1 1 . . 
+        1 1 1 1 1 1 1 1 
+        `,img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        1 1 1 1 1 1 1 1 
+        `,img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . d d . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . 1 1 1 1 1 1 . 
+        1 1 1 1 1 1 1 1 
+        `,img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . d d . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . 1 1 1 1 1 1 . 
+        1 1 1 1 1 1 1 1 
+        `,img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . d d . . . 
+        . . . 1 1 . . . 
+        . 1 . 1 1 . 1 . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . 1 1 1 1 1 1 . 
+        . 1 1 1 1 1 1 . 
+        1 1 1 1 1 1 1 1 
+        `,img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . d d . . . 
+        d . . 1 1 . . d 
+        . 1 . 1 1 . 1 . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . 1 1 1 1 1 1 . 
+        . 1 1 1 1 1 1 . 
+        1 1 1 1 1 1 1 1 
+        1 1 1 1 1 1 1 1 
+        `,img`
+        . . d d d d . . 
+        d . . 1 1 . . d 
+        . 1 . 1 1 . 1 . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . 1 1 1 1 1 1 . 
+        . 1 1 1 1 1 1 . 
+        1 1 1 1 1 1 1 1 
+        1 1 1 1 1 1 1 1 
+        `,img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . d d . . . 
+        d . . 1 1 . . d 
+        . 1 . 1 1 . 1 . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . 1 1 1 1 1 1 . 
+        . 1 1 1 1 1 1 . 
+        1 1 1 1 1 1 1 1 
+        1 1 1 1 1 1 1 1 
+        `,img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . d d . . . 
+        . . . 1 1 . . . 
+        . 1 . 1 1 . 1 . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . 1 1 1 1 1 1 . 
+        . 1 1 1 1 1 1 . 
+        1 1 1 1 1 1 1 1 
+        `,img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . d d . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . 1 1 1 1 1 1 . 
+        1 1 1 1 1 1 1 1 
+        `,img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . d d . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        . 1 1 1 1 1 1 . 
+        1 1 1 1 1 1 1 1 
+        `,img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . 1 1 1 1 . . 
+        . . 1 1 1 1 . . 
+        1 1 1 1 1 1 1 1 
+        `,img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . 1 1 . . . 
+        . . . 1 1 . . . 
+        . . 1 1 1 1 . . 
+        1 1 1 1 1 1 1 1 
+        `,img`
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . . . 1 1 . . . 
+        1 1 1 1 1 1 1 1 
+        `],
+    100,
+    false
+    )
+    sprite.changeScale(1, ScaleAnchor.Middle)
+    timer.after(1900, function () {
+        sprites.destroy(sprite)
+    })
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Upgrade, function (sprite, otherSprite) {
+    if (GameStarted == 1) {
+        if (controller.A.isPressed()) {
+            if (UpgradeNumber == 1) {
+                if (CookieAmount > 99) {
+                    CookieAmount += -100
+                    CookieWorth += 1
+                    RandomCookie += 1
+                    sprites.destroy(otherSprite)
+                    Upgrade = sprites.create(img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeddeeeddeeeddeeeeeeeeeeeee6
+                        6eeefddddfeeeeedeedeededeedeeeeeeeeeeee6
+                        6eefddddddfeeeedeedeededeedeeeeeeeeeeee6
+                        6efdd6dd6ddfeeedeedeededeedeeeeeeeeeeee6
+                        6efddddddddfeeedeedeededeedeeeeeeeeeeee6
+                        6efd6dddd6dfeeedeedeededeedeeeeeeeeeeee6
+                        6efddddddddfeeedeedeededeedeeeeeeeeeeee6
+                        6eefddd6ddfeeeedeedeededeedeeeeeeeeeeee6
+                        6eeefddddfeeeeedeedeededeedeeeeeeeeeeee6
+                        6eeeeffffeeeeedddeeddeeeddeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `, SpriteKind.Upgrade)
+                    animation.runImageAnimation(
+                    Upgrade,
+                    [img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeeddeeddddeeddeeeeeeeeeeee6
+                        6eeef6666feeeedeededeededeedeeeeeeeeeee6
+                        6eef666666feeeeeededeeeedeedeeeeeeeeeee6
+                        6ef66d66d66feeeedeedddeedeedeeeeeeeeeee6
+                        6ef66666666feeeedeeeeededeedeeeeeeeeeee6
+                        6ef6d6666d6feeedeeeeeededeedeeeeeeeeeee6
+                        6ef66666666feeedeeeeeededeedeeeeeeeeeee6
+                        6eef666d66feeedeeeeeeededeedeeeeeeeeeee6
+                        6eeef6666feeeedeeeedeededeedeeeeeeeeeee6
+                        6eeeeffffeeeeeddddeeddeeeddeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `],
+                    0,
+                    false
+                    )
+                    Upgrade.setPosition(140, 8)
+                    UpgradeNumber = 2
+                }
+            } else if (UpgradeNumber == 2) {
+                if (CookieAmount > 249) {
+                    CookieAmount += -250
+                    CookieWorth += 1
+                    RandomCookie += 1
+                    sprites.destroy(otherSprite)
+                    Upgrade = sprites.create(img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeddeeeddeeeddeeeeeeeeeeeee6
+                        6eeefddddfeeeeedeedeededeedeeeeeeeeeeee6
+                        6eefddddddfeeeedeedeededeedeeeeeeeeeeee6
+                        6efdd6dd6ddfeeedeedeededeedeeeeeeeeeeee6
+                        6efddddddddfeeedeedeededeedeeeeeeeeeeee6
+                        6efd6dddd6dfeeedeedeededeedeeeeeeeeeeee6
+                        6efddddddddfeeedeedeededeedeeeeeeeeeeee6
+                        6eefddd6ddfeeeedeedeededeedeeeeeeeeeeee6
+                        6eeefddddfeeeeedeedeededeedeeeeeeeeeeee6
+                        6eeeeffffeeeeedddeeddeeeddeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `, SpriteKind.Upgrade)
+                    animation.runImageAnimation(
+                    Upgrade,
+                    [img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeddeeeddeeeddeeeddeeeeeeee6
+                        6eeef4444feeeeedeedeededeededeedeeeeeee6
+                        6eef444444feeeedeedeededeededeedeeeeeee6
+                        6ef44444444feeedeedeededeededeedeeeeeee6
+                        6ef44444444feeedeedeededeededeedeeeeeee6
+                        6ef44444444feeedeedeededeededeedeeeeeee6
+                        6ef44444444feeedeedeededeededeedeeeeeee6
+                        6eef444444feeeedeedeededeededeedeeeeeee6
+                        6eeef4444feeeeedeedeededeededeedeeeeeee6
+                        6eeeeffffeeeeedddeeddeeeddeeeddeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `],
+                    0,
+                    false
+                    )
+                    Upgrade.setPosition(140, 8)
+                    UpgradeNumber = 3
+                }
+            } else if (UpgradeNumber == 3) {
+                if (CookieAmount > 999) {
+                    CookieAmount += -1000
+                    CookieWorth += 1
+                    RandomCookie += 1
+                    sprites.destroy(otherSprite)
+                    Upgrade = sprites.create(img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeddeeeddeeeddeeeeeeeeeeeee6
+                        6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
+                        6eef444444feeeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6eef444444feeeedeedeededeedeeeeeeeeeeee6
+                        6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
+                        6eeeeffffeeeeedddeeddeeeddeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `, SpriteKind.Upgrade)
+                    animation.runImageAnimation(
+                    Upgrade,
+                    [img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeddddedeeedeeeeeeeeeeeeeee6
+                        6eeef4464feeeedeeeedeedeeeeeeeeeeeeeeee6
+                        6eef644444feeedeeeededeeeeeeeeeeeeeeeee6
+                        6ef44664664feedeeeededeeeeeeeeeeeeeeeee6
+                        6ef64664664feedddeeddeeeeeeeeeeeeeeeeee6
+                        6ef44444446feeeeededdeeeeeeeeeeeeeeeeee6
+                        6ef46446644feeeeedededeeeeeeeeeeeeeeeee6
+                        6eef444664feeedeededeedeeeeeeeeeeeeeeee6
+                        6eeef4644feeeeeddeedeeedeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `],
+                    100,
+                    false
+                    )
+                    Upgrade.setPosition(140, 8)
+                    UpgradeNumber = 4
+                }
+            } else if (UpgradeNumber == 4) {
+                if (CookieAmount > 4999) {
+                    CookieAmount += -5000
+                    CookieWorth += 2
+                    RandomCookie += 1
+                    sprites.destroy(otherSprite)
+                    Upgrade = sprites.create(img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeddeeeddeeeddeeeeeeeeeeeee6
+                        6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
+                        6eef444444feeeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6eef444444feeeedeedeededeedeeeeeeeeeeee6
+                        6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
+                        6eeeeffffeeeeedddeeddeeeddeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `, SpriteKind.Upgrade)
+                    animation.runImageAnimation(
+                    Upgrade,
+                    [img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeffffffffeeeeddeeddddedeeedeeeeeeeeee6
+                        6efdddd6666feededeedeeeedeedeeeeeeeeeee6
+                        6efdddd6666feeeedeedeeeededeeeeeeeeeeee6
+                        6efdddd6666feeeedeedeeeededeeeeeeeeeeee6
+                        6efdddd6666feeeedeedddeeddeeeeeeeeeeeee6
+                        6ef6666ddddfeeeedeeeeededdeeeeeeeeeeeee6
+                        6ef6666ddddfeeeedeeeeedededeeeeeeeeeeee6
+                        6ef6666ddddfeeeedeedeededeedeeeeeeeeeee6
+                        6ef6666ddddfeeeedeeeddeedeeedeeeeeeeeee6
+                        6eeffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `],
+                    100,
+                    false
+                    )
+                    Upgrade.setPosition(140, 8)
+                    UpgradeNumber = 5
+                }
+            } else if (UpgradeNumber == 5) {
+                if (CookieAmount > 14999) {
+                    CookieAmount += -15000
+                    CookieWorth += 4
+                    RandomCookie += 1
+                    sprites.destroy(otherSprite)
+                    Upgrade = sprites.create(img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeddeeeddeeeddeeeeeeeeeeeee6
+                        6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
+                        6eef444444feeeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6eef444444feeeedeedeededeedeeeeeeeeeeee6
+                        6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
+                        6eeeeffffeeeeedddeeddeeeddeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `, SpriteKind.Upgrade)
+                    animation.runImageAnimation(
+                    Upgrade,
+                    [img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeedddeeddddedeeedeeeeeeeee6
+                        6eeef6ee6feeeedeeededeeeedeedeeeeeeeeee6
+                        6eefe6ee6efeeeeeeededeeeededeeeeeeeeeee6
+                        6ef66666666feeeeedeedeeeededeeeeeeeeeee6
+                        6efee6ee6eefeeeedeeedddeeddeeeeeeeeeeee6
+                        6efee6ee6eefeeedeeeeeeededdeeeeeeeeeeee6
+                        6ef66666666feedeeeeeeeedededeeeeeeeeeee6
+                        6eefe6ee6efeeedeeeeedeededeedeeeeeeeeee6
+                        6eeef6ee6feeeedddddeeddeedeeedeeeeeeeee6
+                        6eeeeffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `],
+                    100,
+                    false
+                    )
+                    Upgrade.setPosition(140, 8)
+                    UpgradeNumber = 6
+                }
+            } else if (UpgradeNumber == 6) {
+                if (CookieAmount > 24999) {
+                    CookieAmount += -25000
+                    CookieWorth += 5
+                    RandomCookie += 1
+                    sprites.destroy(otherSprite)
+                    Upgrade = sprites.create(img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeddeeeddeeeddeeeeeeeeeeeee6
+                        6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
+                        6eef444444feeeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6eef444444feeeedeedeededeedeeeeeeeeeeee6
+                        6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
+                        6eeeeffffeeeeedddeeddeeeddeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `, SpriteKind.Upgrade)
+                    animation.runImageAnimation(
+                    Upgrade,
+                    [img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeedddddeeddddedeeedeeeeeeeee6
+                        6eeef4444feeeeeeedeedeeeedeedeeeeeeeeee6
+                        6eef4e4e44feeeeeedeedeeeededeeeeeeeeeee6
+                        6ef4e4e4e44feeeedeeedeeeededeeeeeeeeeee6
+                        6ef44e4e4e4feeeedeeedddeeddeeeeeeeeeeee6
+                        6ef4e4e4e44feeedeeeeeeededdeeeeeeeeeeee6
+                        6ef44e4e4e4feeedeeeeeeedededeeeeeeeeeee6
+                        6eef44e4e4feeedeeeeedeededeedeeeeeeeeee6
+                        6eeef4444feeeedeeeeeeddeedeeedeeeeeeeee6
+                        6eeeeffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `],
+                    100,
+                    false
+                    )
+                    Upgrade.setPosition(140, 8)
+                    UpgradeNumber = 7
+                }
+            } else if (UpgradeNumber == 7) {
+                if (CookieAmount > 74999) {
+                    CookieAmount += -75000
+                    CookieWorth += 10
+                    RandomCookie += 1
+                    sprites.destroy(otherSprite)
+                    Upgrade = sprites.create(img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeddeeeddeeeddeeeeeeeeeeeee6
+                        6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
+                        6eef444444feeeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6eef444444feeeedeedeededeedeeeeeeeeeeee6
+                        6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
+                        6eeeeffffeeeeedddeeddeeeddeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `, SpriteKind.Upgrade)
+                    animation.runImageAnimation(
+                    Upgrade,
+                    [img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeeeddeddddeeddeedeeedeeeee6
+                        6eeef4464feeeeedededeeeedeededeedeeeeee6
+                        6eef444444feeeeeededeeeedeedededeeeeeee6
+                        6ef444ff644feeeeededeeeedeedededeeeeeee6
+                        6ef64feef44feeeeededddeedeededdeeeeeeee6
+                        6ef44feef64feeeeedeeeededeededdeeeeeeee6
+                        6ef464ff444feeeeedeeeededeedededeeeeeee6
+                        6eef444444feeeeeededeededeededeedeeeeee6
+                        6eeef4464feeeeeeedeeddeeeddeedeeedeeeee6
+                        6eeeeffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `],
+                    100,
+                    false
+                    )
+                    Upgrade.setPosition(140, 8)
+                    UpgradeNumber = 8
+                }
+            } else if (UpgradeNumber == 8) {
+                if (CookieAmount > 149999) {
+                    CookieAmount += -150000
+                    CookieWorth += 15
+                    RandomCookie += 1
+                    sprites.destroy(otherSprite)
+                    Upgrade = sprites.create(img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeddeeeddeeeddeeeeeeeeeeeee6
+                        6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
+                        6eef444444feeeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6eef444444feeeedeedeededeedeeeeeeeeeeee6
+                        6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
+                        6eeeeffffeeeeedddeeddeeeddeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `, SpriteKind.Upgrade)
+                    animation.runImageAnimation(
+                    Upgrade,
+                    [img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeefffeeeeeddddeeddeeeddeedeeedeeeee6
+                        6eeeff444ffeeedeeeedeededeededeedeeeeee6
+                        6eef4446444feedeeeedeededeedededeeeeeee6
+                        6ef4ff444ff4fedeeeedeededeedededeeeeeee6
+                        6ef444f4f446fedddeedeededeededdeeeeeeee6
+                        6ef4644f4644feeeededeededeededdeeeeeeee6
+                        6ef4444f4444feeeededeededeedededeeeeeee6
+                        6eef446f464feedeededeededeededeedeeeeee6
+                        6eeeff4f4ffeeeeddeeeddeeeddeedeeedeeeee6
+                        6eeeeefffeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `],
+                    100,
+                    false
+                    )
+                    Upgrade.setPosition(140, 8)
+                    UpgradeNumber = 9
+                }
+            } else if (UpgradeNumber == 9) {
+                if (CookieAmount > 499999) {
+                    CookieAmount += -500000
+                    CookieWorth += 50
+                    RandomCookie += 1
+                    sprites.destroy(otherSprite)
+                    Upgrade = sprites.create(img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeffffeeeeeddeeeddeeeddeeeeeeeeeeeee6
+                        6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
+                        6eef444444feeeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6ef44444444feeedeedeededeedeeeeeeeeeeee6
+                        6eef444444feeeedeedeededeedeeeeeeeeeeee6
+                        6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
+                        6eeeeffffeeeeedddeeddeeeddeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `, SpriteKind.Upgrade)
+                    animation.runImageAnimation(
+                    Upgrade,
+                    [img`
+                        6666666666666666666666666666666666666666
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+                        6666666666666666666666666666666666666666
+                        `],
+                    100,
+                    false
+                    )
+                    Upgrade.setPosition(140, 8)
+                    UpgradeNumber = 0
+                    Achievements.showAchievement(
+                    "Cookie Addict"
+                    )
+                }
+            }
+        }
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.CookieHacking, function (sprite, otherSprite) {
     if (controller.A.isPressed()) {
-        if (UpgradeNumber == 1) {
-            if (CookieAmount > 99) {
-                CookieAmount += -100
-                CookieWorth += 1
-                RandomCookie += 1
-                sprites.destroy(otherSprite)
-                Upgrade = sprites.create(img`
-                    6666666666666666666666666666666666666666
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeffffeeeeeddeeeddeeeddeeeeeeeeeeeee6
-                    6eeefddddfeeeeedeedeededeedeeeeeeeeeeee6
-                    6eefddddddfeeeedeedeededeedeeeeeeeeeeee6
-                    6efdd6dd6ddfeeedeedeededeedeeeeeeeeeeee6
-                    6efddddddddfeeedeedeededeedeeeeeeeeeeee6
-                    6efd6dddd6dfeeedeedeededeedeeeeeeeeeeee6
-                    6efddddddddfeeedeedeededeedeeeeeeeeeeee6
-                    6eefddd6ddfeeeedeedeededeedeeeeeeeeeeee6
-                    6eeefddddfeeeeedeedeededeedeeeeeeeeeeee6
-                    6eeeeffffeeeeedddeeddeeeddeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6666666666666666666666666666666666666666
-                    `, SpriteKind.Upgrade)
-                animation.runImageAnimation(
-                Upgrade,
-                [img`
-                    6666666666666666666666666666666666666666
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeffffeeeeeeddeeddddeeddeeeeeeeeeeee6
-                    6eeef6666feeeedeededeededeedeeeeeeeeeee6
-                    6eef666666feeeeeededeeeedeedeeeeeeeeeee6
-                    6ef66d66d66feeeedeedddeedeedeeeeeeeeeee6
-                    6ef66666666feeeedeeeeededeedeeeeeeeeeee6
-                    6ef6d6666d6feeedeeeeeededeedeeeeeeeeeee6
-                    6ef66666666feeedeeeeeededeedeeeeeeeeeee6
-                    6eef666d66feeedeeeeeeededeedeeeeeeeeeee6
-                    6eeef6666feeeedeeeedeededeedeeeeeeeeeee6
-                    6eeeeffffeeeeeddddeeddeeeddeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6666666666666666666666666666666666666666
-                    `],
-                0,
-                false
-                )
-                Upgrade.setPosition(140, 8)
-                UpgradeNumber = 2
-            }
-        } else if (UpgradeNumber == 2) {
-            if (CookieAmount > 249) {
-                CookieAmount += -250
-                CookieWorth += 1
-                RandomCookie += 1
-                sprites.destroy(otherSprite)
-                Upgrade = sprites.create(img`
-                    6666666666666666666666666666666666666666
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeffffeeeeeddeeeddeeeddeeeeeeeeeeeee6
-                    6eeefddddfeeeeedeedeededeedeeeeeeeeeeee6
-                    6eefddddddfeeeedeedeededeedeeeeeeeeeeee6
-                    6efdd6dd6ddfeeedeedeededeedeeeeeeeeeeee6
-                    6efddddddddfeeedeedeededeedeeeeeeeeeeee6
-                    6efd6dddd6dfeeedeedeededeedeeeeeeeeeeee6
-                    6efddddddddfeeedeedeededeedeeeeeeeeeeee6
-                    6eefddd6ddfeeeedeedeededeedeeeeeeeeeeee6
-                    6eeefddddfeeeeedeedeededeedeeeeeeeeeeee6
-                    6eeeeffffeeeeedddeeddeeeddeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6666666666666666666666666666666666666666
-                    `, SpriteKind.Upgrade)
-                animation.runImageAnimation(
-                Upgrade,
-                [img`
-                    6666666666666666666666666666666666666666
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeffffeeeeeddeeeddeeeddeeeddeeeeeeee6
-                    6eeef4444feeeeedeedeededeededeedeeeeeee6
-                    6eef444444feeeedeedeededeededeedeeeeeee6
-                    6ef44444444feeedeedeededeededeedeeeeeee6
-                    6ef44444444feeedeedeededeededeedeeeeeee6
-                    6ef44444444feeedeedeededeededeedeeeeeee6
-                    6ef44444444feeedeedeededeededeedeeeeeee6
-                    6eef444444feeeedeedeededeededeedeeeeeee6
-                    6eeef4444feeeeedeedeededeededeedeeeeeee6
-                    6eeeeffffeeeeedddeeddeeeddeeeddeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6666666666666666666666666666666666666666
-                    `],
-                0,
-                false
-                )
-                Upgrade.setPosition(140, 8)
-                UpgradeNumber = 3
-            }
-        } else if (UpgradeNumber == 3) {
-            if (CookieAmount > 999) {
-                CookieAmount += -1000
-                CookieWorth += 1
-                RandomCookie += 1
-                sprites.destroy(otherSprite)
-                Upgrade = sprites.create(img`
-                    6666666666666666666666666666666666666666
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeffffeeeeeddeeeddeeeddeeeeeeeeeeeee6
-                    6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
-                    6eef444444feeeedeedeededeedeeeeeeeeeeee6
-                    6ef44444444feeedeedeededeedeeeeeeeeeeee6
-                    6ef44444444feeedeedeededeedeeeeeeeeeeee6
-                    6ef44444444feeedeedeededeedeeeeeeeeeeee6
-                    6ef44444444feeedeedeededeedeeeeeeeeeeee6
-                    6eef444444feeeedeedeededeedeeeeeeeeeeee6
-                    6eeef4444feeeeedeedeededeedeeeeeeeeeeee6
-                    6eeeeffffeeeeedddeeddeeeddeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6666666666666666666666666666666666666666
-                    `, SpriteKind.Upgrade)
-                animation.runImageAnimation(
-                Upgrade,
-                [img`
-                    6666666666666666666666666666666666666666
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeffffeeeeeddeeeddeeeddeeeddeeeeeeee6
-                    6eeeffffffeeeeedeedeededeededeedeeeeeee6
-                    6eeffffffffeeeedeedeededeededeedeeeeeee6
-                    6efff11fffffeeedeedeededeededeedeeeeeee6
-                    6efffff1ffffeeedeedeededeededeedeeeeeee6
-                    6efffff1ffffeeedeedeededeededeedeeeeeee6
-                    6effff1fffffeeedeedeededeededeedeeeeeee6
-                    6eefff1ffffeeeedeedeededeededeedeeeeeee6
-                    6eeeff1fffeeeeedeedeededeededeedeeeeeee6
-                    6eeeeffffeeeeedddeeddeeeddeeeddeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
-                    6666666666666666666666666666666666666666
-                    `],
-                100,
-                false
-                )
-                Upgrade.setPosition(140, 8)
-                UpgradeNumber = 3
-            }
+        if (CookieAmount > 999999) {
+            HackerAmount += 1
+            CookieAmount += -1000000
+        }
+    }
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.CookieBank, function (sprite, otherSprite) {
+    if (controller.A.isPressed()) {
+        if (CookieAmount > 99999) {
+            BankAmount += 1
+            CookieAmount += -100000
         }
     }
 })
 sprites.onOverlap(SpriteKind.GoldenCookie, SpriteKind.Milk, function (sprite, otherSprite) {
     CookieAmount += 7 * CookieWorth
     sprites.destroy(sprite)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.BuyFactory, function (sprite, otherSprite) {
+    if (controller.A.isPressed()) {
+        if (CookieAmount > 9999) {
+            FactoryAmount += 1
+            CookieAmount += -10000
+        }
+    }
 })
 sprites.onOverlap(SpriteKind.milkglass, SpriteKind.Milk, function (sprite, otherSprite) {
     if (Milk.y > 60) {
@@ -632,13 +1380,26 @@ controller.combos.attachCombo("AABBABAA", function () {
         `, SpriteKind.CheatMenu)
     CheatMenuIcon.setPosition(150, 110)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.BuyKid, function (sprite, otherSprite) {
+    if (controller.A.isPressed()) {
+        if (CookieAmount > 99) {
+            KidAmount += 1
+            CookieAmount += -100
+        }
+    }
+})
+let KidAmount = 0
 let CheatMenuIcon: Sprite = null
+let FactoryAmount = 0
+let BankAmount = 0
+let HackerAmount = 0
 let CheatMenu: miniMenu.MenuSprite = null
 let CheatMenuActivated = 0
-let CookieAmount = 0
 let Cookie: Sprite = null
 let GoldenCookie: Sprite = null
 let SelectedCookie = 0
+let PlantAmount = 0
+let CookieAmount = 0
 let CookieWorth = 0
 let UpgradeNumber = 0
 let Upgrade: Sprite = null
@@ -646,24 +1407,150 @@ let RandomCookie = 0
 let Milk: Sprite = null
 let Cursor: Sprite = null
 let BigCookie: Sprite = null
-scene.setBackgroundColor(14)
+let GameStarted = 0
+scene.setBackgroundImage(img`
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    `)
+pauseUntil(() => controller.A.isPressed())
+GameStarted += 1
 BigCookie = sprites.create(img`
-    . . . . . f f f f f f . . . . . 
-    . . . f f 4 4 4 4 4 4 f f . . . 
-    . . f 4 4 4 4 4 6 4 4 4 4 f . . 
-    . f 4 4 6 4 4 4 4 4 4 4 4 4 f . 
-    . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
-    f 4 4 4 4 4 4 4 4 4 4 6 4 4 4 f 
-    f 4 4 6 4 4 4 6 4 4 4 4 4 4 4 f 
-    f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
-    f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
-    f 4 4 4 6 4 4 4 4 6 4 4 6 4 4 f 
-    f 4 4 4 4 4 4 4 4 4 4 4 4 4 4 f 
-    . f 4 4 4 4 4 4 4 4 4 4 4 4 f . 
-    . f 4 4 4 4 4 6 4 4 4 4 4 4 f . 
-    . . f 4 4 4 4 4 4 4 4 4 4 f . . 
-    . . . f f 4 4 4 4 4 4 f f . . . 
-    . . . . . f f f f f f . . . . . 
+    ..................
+    ......ffffff......
+    ....ff444444ff....
+    ...f4444464444f...
+    ..f446444444444f..
+    ..f444444444444f..
+    .f44444444446444f.
+    .f44644464444444f.
+    .f44444444444444f.
+    .f44444444444444f.
+    .f44464444644644f.
+    .f44444444444444f.
+    ..f444444444444f..
+    ..f444446444444f..
+    ...f4444444444f...
+    ....ff444444ff....
+    ......ffffff......
+    ..................
     `, SpriteKind.BigCookie)
 BigCookie.changeScale(3, ScaleAnchor.Middle)
 BigCookie.setPosition(80, 50)
@@ -829,6 +1716,118 @@ let CookieCounter = textsprite.create("0", 0, 6)
 CookieCounter.setPosition(7, 7)
 CookieCounter.changeScale(1, ScaleAnchor.Middle)
 CookieWorth = 1
+let BuyTower = sprites.create(img`
+    6666666666666666666666666666666666666666
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eeeeedddeeeeeddeeeddeeeddeeeeeeeeeeeee6
+    6eeeeededeeeeeedeedeededeedeeeeeeeeeeee6
+    6eeeeedddeeeeeedeedeededeedeeeeeeeeeeee6
+    6eeeeeedeeeeeeedeedeededeedeeeeeeeeeeee6
+    6eeeedddddeeeeedeedeededeedeeeeeeeeeeee6
+    6eeeeeedeeeeeeedeedeededeedeeeeeeeeeeee6
+    6eeeeededeeeeeedeedeededeedeeeeeeeeeeee6
+    6eeeeededeeeeeedeedeededeedeeeeeeeeeeee6
+    6eeeedeeedeeeeedeedeededeedeeeeeeeeeeee6
+    6eeeedeeedeeeedddeeddeeeddeeeeeeeeeeeee6
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6666666666666666666666666666666666666666
+    `, SpriteKind.BuyKid)
+BuyTower.setPosition(20, 28)
+BuyTower = sprites.create(img`
+    6666666666666666666666666666666666666666
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eeee444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eee46464eeeeeddeeeddeeeddeeeddeeeeeeee6
+    6eee44644eeeeeedeedeededeededeedeeeeeee6
+    6eee46464eeeeeedeedeededeededeedeeeeeee6
+    6eeee444eeeeeeedeedeededeededeedeeeeeee6
+    6eeeee7eeeeeeeedeedeededeededeedeeeeeee6
+    6eeee777eeeeeeedeedeededeededeedeeeeeee6
+    6eeeee7eeeeeeeedeedeededeededeedeeeeeee6
+    6eee66666eeeeeedeedeededeededeedeeeeeee6
+    6eee66666eeeeeedeedeededeededeedeeeeeee6
+    6eee66666eeeeedddeeddeeeddeeeddeeeeeeee6
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6666666666666666666666666666666666666666
+    `, SpriteKind.BuyPlant)
+BuyTower.setPosition(20, 45)
+BuyTower = sprites.create(img`
+    6666666666666666666666666666666666666666
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eeeeeebbbeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eebbeeeebbeeeddeeeddeedeeedeeeeeeeeeee6
+    6eeebbeeecceeeedeedeededeedeeeeeeeeeeee6
+    6eeecceeecceeeedeedeedededeeeeeeeeeeeee6
+    6eeccccccccceeedeedeedededeeeeeeeeeeeee6
+    6eecbb444bbceeedeedeededdeeeeeeeeeeeeee6
+    6eecb46464bceeedeedeededdeeeeeeeeeeeeee6
+    6eecb44644bceeedeedeedededeeeeeeeeeeeee6
+    6eecb46464bceeedeedeedededeeeeeeeeeeeee6
+    6eecbb444bbceeedeedeededeedeeeeeeeeeeee6
+    6eeccccccccceedddeeddeedeeedeeeeeeeeeee6
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6666666666666666666666666666666666666666
+    `, SpriteKind.BuyFactory)
+BuyTower.setPosition(20, 62)
+BuyTower = sprites.create(img`
+    6666666666666666666666666666666666666666
+    6eeeee444eeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eeee46464eeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eeee44644eeeeddeeeddeeeddeedeeedeeeeee6
+    6eeee46464eeeeedeedeededeededeedeeeeeee6
+    6eeeee444eeeeeedeedeededeedededeeeeeeee6
+    6eeedd111ddeeeedeedeededeedededeeeeeeee6
+    6eed11e1e11deeedeedeededeededdeeeeeeeee6
+    6ee1e1e1e1e1eeedeedeededeededdeeeeeeeee6
+    6ee1e1e1e1e1eeedeedeededeedededeeeeeeee6
+    6ee1e1e1e1e1eeedeedeededeedededeeeeeeee6
+    6ee1e1e1e1e1eeedeedeededeededeedeeeeeee6
+    6eedddddddddeedddeeddeeeddeedeeedeeeeee6
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6666666666666666666666666666666666666666
+    `, SpriteKind.CookieBank)
+BuyTower.setPosition(20, 79)
+BuyTower = sprites.create(img`
+    6666666666666666666666666666666666666666
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eeeefffffeeeeddeeeddeeeddeeeddeedeeede6
+    6eeef57577feeeedeedeededeededeededeedee6
+    6eef757f777feeedeedeededeededeedededeee6
+    6eef7f75557feeedeedeededeededeedededeee6
+    6eef7577757feeedeedeededeededeededdeeee6
+    6eef75557f5feeedeedeededeededeededdeeee6
+    6eef777f777feeedeedeededeededeedededeee6
+    6eeef77577feeeedeedeededeededeedededeee6
+    6eeeefffffeeeeedeedeededeededeededeedee6
+    6eeeeeeeeeeeeedddeeddeeeddeeeddeedeeede6
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6
+    6666666666666666666666666666666666666666
+    `, SpriteKind.CookieHacking)
+BuyTower.setPosition(20, 96)
+game.onUpdateInterval(1000, function () {
+    CookieAmount += 1 * KidAmount
+})
+game.onUpdateInterval(1000, function () {
+    CookieAmount += 11 * PlantAmount
+})
+game.onUpdateInterval(1000, function () {
+    CookieAmount += 120 * FactoryAmount
+})
+game.onUpdateInterval(1000, function () {
+    CookieAmount += 1300 * BankAmount
+})
+game.onUpdateInterval(1000, function () {
+    CookieAmount += 14000 * HackerAmount
+})
 forever(function () {
-    CookieCounter.setText(convertToText(CookieAmount))
+    if (GameStarted == 1) {
+        CookieCounter.setText(convertToText(CookieAmount))
+    }
 })
