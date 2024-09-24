@@ -28,6 +28,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         sprites.destroy(Textsprite2)
         sprites.destroy(PressAToStart)
         color.startFadeFromCurrent(color.originalPalette, 1000)
+        tiles.setCurrentTilemap(tilemap`level16`)
     }
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
