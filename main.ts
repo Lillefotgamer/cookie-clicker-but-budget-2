@@ -20,6 +20,17 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.BuyPlant, function (sprite, othe
         }
     }
 })
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (GameStarted == 0) {
+        color.FadeToBlack.startScreenEffect(1000)
+        pause(2500)
+        sprites.destroy(textSprite)
+        sprites.destroy(Textsprite2)
+        sprites.destroy(PressAToStart)
+        color.startFadeFromCurrent(color.originalPalette, 1000)
+        tiles.loadMap(tiles.createSmallMap(tilemap`level11`))
+    }
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (GameStarted == 1) {
         if (Cursor.overlapsWith(BigCookie)) {
@@ -1408,6 +1419,9 @@ let Milk: Sprite = null
 let Cursor: Sprite = null
 let BigCookie: Sprite = null
 let GameStarted = 0
+let PressAToStart: Sprite = null
+let Textsprite2: TextSprite = null
+let textSprite: TextSprite = null
 scene.setBackgroundImage(img`
     eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
     eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
@@ -1530,13 +1544,13 @@ scene.setBackgroundImage(img`
     eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
     eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
     `)
-let textSprite = textsprite.create("Cookie Clicker", 0, 6)
+textSprite = textsprite.create("Cookie Clicker", 0, 6)
 textSprite.changeScale(0.5, ScaleAnchor.Middle)
 textSprite.setPosition(79, 20)
-let Textsprite2 = textsprite.create("But Budget", 0, 6)
+Textsprite2 = textsprite.create("But Budget", 0, 6)
 Textsprite2.changeScale(0.5, ScaleAnchor.Middle)
 Textsprite2.setPosition(80, 35)
-let PressAToStart = sprites.create(img`
+PressAToStart = sprites.create(img`
     666666666..666666666...66666666..666666666...666666666..........66666.....66666666666..6666666.......666666666..66666666666.....66666......66666666..66666666666
     6666666666.6666666666.666666666.66666666666.66666666666........6666666....66666666666.666666666.....66666666666.66666666666....6666666....666666666..66666666666
     6666666666.6666666666.666666666.66666666666.66666666666........6666666....66666666666.666666666.....66666666666.66666666666...66666666....6666666666.66666666666
