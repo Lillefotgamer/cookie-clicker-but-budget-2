@@ -138,7 +138,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 if (GardenTick == 8) {
                     CallPlantKill()
                 }
-                pause(30)
+                pause(3000)
             }
         })
     }
@@ -1029,23 +1029,23 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Milk, function (sprite, othe
     })
 })
 function RunMutation () {
-    WhichMutation = randint(1, 3)
+    WhichMutation = randint(1, 7)
     if (WhichMutation == 1) {
-        if (RandomMutation == 1) {
+        if (RandomMutation == 3) {
             if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile15`)) {
-                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile19`)
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile4`)
             }
         } else if (RandomMutation == 2) {
             if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile15`)) {
-                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile19`)
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile4`)
             }
         } else if (RandomMutation == 3) {
             if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile15`)) {
-                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile19`)
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile4`)
             }
         } else if (RandomMutation == 4) {
             if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile15`)) {
-                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile19`)
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile4`)
             }
         }
     } else if (WhichMutation == 2) {
@@ -1074,6 +1074,78 @@ function RunMutation () {
                         tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile20`)
                     }
                 }
+            }
+        }
+    } else if (WhichMutation == 4) {
+        if (RandomMutation == 3) {
+            if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile15`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile19`)
+            }
+        } else if (RandomMutation == 2) {
+            if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile15`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile19`)
+            }
+        } else if (RandomMutation == 3) {
+            if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile15`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile19`)
+            }
+        } else if (RandomMutation == 4) {
+            if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile15`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile19`)
+            }
+        }
+    } else if (WhichMutation == 5) {
+        if (RandomMutation == 3) {
+            if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile22`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile19`)
+            }
+        } else if (RandomMutation == 2) {
+            if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile22`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile19`)
+            }
+        } else if (RandomMutation == 3) {
+            if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile22`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile19`)
+            }
+        } else if (RandomMutation == 4) {
+            if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile22`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile19`)
+            }
+        }
+    } else if (WhichMutation == 6) {
+        if (RandomMutation == 3) {
+            if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile23`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile20`)
+            }
+        } else if (RandomMutation == 2) {
+            if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile23`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile20`)
+            }
+        } else if (RandomMutation == 3) {
+            if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile23`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile20`)
+            }
+        } else if (RandomMutation == 4) {
+            if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile23`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile20`)
+            }
+        }
+    } else if (WhichMutation == 7) {
+        if (RandomMutation == 3) {
+            if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile12`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile13`)
+            }
+        } else if (RandomMutation == 2) {
+            if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile12`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile13`)
+            }
+        } else if (RandomMutation == 3) {
+            if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile12`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile13`)
+            }
+        } else if (RandomMutation == 4) {
+            if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile12`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile13`)
             }
         }
     }
@@ -1659,27 +1731,6 @@ function Click () {
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile23`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile20`)
             for (let index = 0; index < 4; index++) {
-                GrowWeed = sprites.create(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `, SpriteKind.Other)
-                tiles.placeOnRandomTile(GrowWeed, assets.tile`myTile9`)
-                tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile24`)
-                sprites.destroy(GrowWeed)
                 CallPlantKill()
             }
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile24`)) {
@@ -1702,6 +1753,32 @@ function Click () {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile18`)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile20`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile25`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile28`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile27`)
+            GrowWeed = sprites.create(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, SpriteKind.Other)
+            tiles.placeOnRandomTile(GrowWeed, assets.tile`myTile12`)
+            if (GrowWeed.tileKindAt(TileDirection.Center, assets.tile`myTile12`)) {
+                tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile24`)
+            }
+            sprites.destroy(GrowWeed)
+            CallPlantKill()
         }
     }
 }
