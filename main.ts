@@ -136,37 +136,38 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                     GardenTick = 0
                 }
                 if (GardenTick == 8) {
-                    for (let index = 0; index < 10; index++) {
-                        if (tiles.tileAtLocationEquals(tiles.getTileLocation(randint(5, 0), randint(0, 9)), assets.tile`myTile28`) && tiles.tileAtLocationEquals(tiles.getTileLocation(randint(5, 0), randint(0, 9)), assets.tile`myTile12`)) {
-                            GrowWeed = sprites.create(img`
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                `, SpriteKind.Other)
-                            tiles.placeOnRandomTile(GrowWeed, assets.tile`myTile12`)
-                            tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile24`)
-                            sprites.destroyAllSpritesOfKind(SpriteKind.Other)
-                        }
-                    }
+                    CallPlantKill()
                 }
-                pause(3000)
+                pause(30)
             }
         })
     }
 })
+function CallPlantKill () {
+    if (tiles.tileAtLocationEquals(tiles.getTileLocation(randint(5, 0), randint(0, 9)), assets.tile`myTile28`) && (tiles.tileAtLocationEquals(tiles.getTileLocation(randint(5, 0), randint(0, 9)), assets.tile`myTile12`) || (tiles.tileAtLocationEquals(tiles.getTileLocation(randint(5, 0), randint(0, 9)), assets.tile`myTile17`) || (tiles.tileAtLocationEquals(tiles.getTileLocation(randint(5, 0), randint(0, 9)), assets.tile`myTile16`) || tiles.tileAtLocationEquals(tiles.getTileLocation(randint(5, 0), randint(0, 9)), assets.tile`myTile13`))))) {
+        GrowWeed = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.Other)
+        tiles.placeOnRandomTile(GrowWeed, assets.tile`myTile12`)
+        tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile24`)
+        sprites.destroyAllSpritesOfKind(SpriteKind.Other)
+    }
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Click()
     if (GameStarted == 1) {
@@ -1028,7 +1029,8 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Milk, function (sprite, othe
     })
 })
 function RunMutation () {
-    if (Math.percentChance(50)) {
+    WhichMutation = randint(1, 3)
+    if (WhichMutation == 1) {
         if (RandomMutation == 1) {
             if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile15`)) {
                 tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile19`)
@@ -1046,29 +1048,31 @@ function RunMutation () {
                 tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile19`)
             }
         }
-    } else {
+    } else if (WhichMutation == 2) {
         if (RandomMutation == 1) {
             if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile28`)) {
-                if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile15`)) {
-                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile20`)
-                }
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile24`)
             }
         } else if (RandomMutation == 2) {
             if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile28`)) {
-                if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile15`)) {
-                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile20`)
-                }
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile24`)
             }
         } else if (RandomMutation == 3) {
             if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile28`)) {
-                if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile15`)) {
-                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile20`)
-                }
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile24`)
             }
         } else if (RandomMutation == 4) {
             if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile28`)) {
-                if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile15`)) {
-                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile20`)
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile24`)
+            }
+        }
+    } else if (WhichMutation == 3) {
+        if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile28`)) {
+            if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile28`)) {
+                if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile28`)) {
+                    if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile28`)) {
+                        tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile20`)
+                    }
                 }
             }
         }
@@ -1676,6 +1680,7 @@ function Click () {
                 tiles.placeOnRandomTile(GrowWeed, assets.tile`myTile9`)
                 tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile24`)
                 sprites.destroy(GrowWeed)
+                CallPlantKill()
             }
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile24`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
@@ -1713,6 +1718,7 @@ let CheatMenuIcon: Sprite = null
 let FactoryAmount = 0
 let BankAmount = 0
 let HackerAmount = 0
+let WhichMutation = 0
 let CheatMenu: miniMenu.MenuSprite = null
 let CheatMenuActivated = 0
 let Tool = 0
