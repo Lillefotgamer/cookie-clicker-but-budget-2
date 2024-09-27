@@ -1171,6 +1171,42 @@ function RunMutation () {
                 tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile30`)
             }
         }
+    } else if (WhichMutation == 13) {
+        if (RandomMutation == 1) {
+            if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile22`)) {
+                if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile28`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile40`)
+                }
+            }
+        } else if (RandomMutation == 2) {
+            if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile22`)) {
+                if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile28`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile40`)
+                }
+            }
+        } else if (RandomMutation == 3) {
+            if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile22`)) {
+                if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile28`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile40`)
+                }
+            }
+        } else if (RandomMutation == 4) {
+            if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile22`)) {
+                if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile28`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile40`)
+                }
+            }
+        }
+    } else if (WhichMutation == 14) {
+        if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile41`)) {
+            if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile41`)) {
+                if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile28`)) {
+                    if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile28`)) {
+                        tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile44`)
+                    }
+                }
+            }
+        }
     }
     sprites.destroyAllSpritesOfKind(SpriteKind.Other2)
 }
@@ -1655,7 +1691,7 @@ sprites.onOverlap(SpriteKind.GoldenCookie, SpriteKind.Milk, function (sprite, ot
     sprites.destroy(sprite)
 })
 function GardenTick () {
-    GardenTick2 = randint(1, 10)
+    GardenTick2 = randint(1, 2)
     if (GardenTick2 == 1) {
         tiles.replaceAllTiles(assets.tile`myTile14`, assets.tile`myTile15`)
         tiles.replaceAllTiles(assets.tile`myTile11`, assets.tile`myTile14`)
@@ -1752,8 +1788,14 @@ function GardenTick () {
         tiles.replaceAllTiles(assets.tile`myTile37`, assets.tile`myTile34`)
         GardenTick2 = 0
     }
-    if (GardenTick2 == 10) {
-        tiles.replaceAllTiles(assets.tile`myTile38`, assets.tile`myTile39`)
+    if (GardenTick2 == 11) {
+        tiles.replaceAllTiles(assets.tile`myTile42`, assets.tile`myTile41`)
+        tiles.replaceAllTiles(assets.tile`myTile43`, assets.tile`myTile42`)
+        GardenTick2 = 0
+    }
+    if (GardenTick2 == 12) {
+        tiles.replaceAllTiles(assets.tile`myTile46`, assets.tile`myTile47`)
+        tiles.replaceAllTiles(assets.tile`myTile45`, assets.tile`myTile46`)
         GardenTick2 = 0
     }
 }
@@ -1860,6 +1902,22 @@ function Click () {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile39`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile40`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile41`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile42`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile43`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile44`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile45`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile46`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile47`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         }
     } else if (Tool == 3) {
         if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile4`)) {
@@ -1880,6 +1938,10 @@ function Click () {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile37`)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile30`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile38`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile40`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile45`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile44`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile43`)
         }
     } else if (Tool == 4) {
         if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile15`)) {
@@ -1935,7 +1997,13 @@ function Click () {
             CookieAmount += 77
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile39`)) {
-            CookieAmount += 777
+            CookieAmount += 100
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile41`)) {
+            CookieAmount += 20
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile47`)) {
+            CookieAmount += 100
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         }
     }
