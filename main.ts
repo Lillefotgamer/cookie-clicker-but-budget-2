@@ -60,7 +60,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             timer.background(function () {
                 for (let index = 0; index < 999999 * 999999; index++) {
                     GardenTick()
-                    pause(3000)
+                    pause(30)
                 }
             })
         }
@@ -956,7 +956,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Milk, function (sprite, othe
     })
 })
 function RunMutation () {
-    WhichMutation = randint(1, 12)
+    WhichMutation = randint(1, 15)
     if (WhichMutation == 1) {
         if (RandomMutation == 1) {
             if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile15`)) {
@@ -1205,6 +1205,24 @@ function RunMutation () {
                         tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile44`)
                     }
                 }
+            }
+        }
+    } else if (WhichMutation == 15) {
+        if (RandomMutation == 1) {
+            if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile41`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile40`)
+            }
+        } else if (RandomMutation == 2) {
+            if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile41`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile40`)
+            }
+        } else if (RandomMutation == 3) {
+            if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile41`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile40`)
+            }
+        } else if (RandomMutation == 4) {
+            if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile41`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile40`)
             }
         }
     }
@@ -1691,7 +1709,7 @@ sprites.onOverlap(SpriteKind.GoldenCookie, SpriteKind.Milk, function (sprite, ot
     sprites.destroy(sprite)
 })
 function GardenTick () {
-    GardenTick2 = randint(1, 2)
+    GardenTick2 = randint(1, 12)
     if (GardenTick2 == 1) {
         tiles.replaceAllTiles(assets.tile`myTile14`, assets.tile`myTile15`)
         tiles.replaceAllTiles(assets.tile`myTile11`, assets.tile`myTile14`)
