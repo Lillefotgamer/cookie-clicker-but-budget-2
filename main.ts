@@ -1806,14 +1806,18 @@ function GardenTick () {
         tiles.replaceAllTiles(assets.tile`myTile37`, assets.tile`myTile34`)
         GardenTick2 = 0
     }
+    if (GardenTick2 == 10) {
+        tiles.replaceAllTiles(assets.tile`myTile34`, assets.tile`myTile35`)
+        tiles.replaceAllTiles(assets.tile`myTile37`, assets.tile`myTile34`)
+        GardenTick2 = 0
+    }
     if (GardenTick2 == 11) {
         tiles.replaceAllTiles(assets.tile`myTile42`, assets.tile`myTile41`)
         tiles.replaceAllTiles(assets.tile`myTile43`, assets.tile`myTile42`)
         GardenTick2 = 0
     }
     if (GardenTick2 == 12) {
-        tiles.replaceAllTiles(assets.tile`myTile46`, assets.tile`myTile47`)
-        tiles.replaceAllTiles(assets.tile`myTile45`, assets.tile`myTile46`)
+        tiles.replaceAllTiles(assets.tile`myTile38`, assets.tile`myTile39`)
         GardenTick2 = 0
     }
 }
@@ -1957,9 +1961,9 @@ function Click () {
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile30`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile38`)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile40`)) {
-            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile45`)
-        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile44`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile43`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile44`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile45`)
         }
     } else if (Tool == 4) {
         if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile15`)) {

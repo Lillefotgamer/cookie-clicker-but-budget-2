@@ -424,7 +424,7 @@ namespace myTiles {
 . . . . . . . . . . 
 . . . . . . . . . . 
 . . . . . . . . . . 
-`, [myTiles.transparency16,myTiles.tile5,myTiles.tile11,myTiles.tile12,myTiles.tile45,myTiles.tile46,myTiles.tile47,myTiles.tile48,myTiles.tile49], TileScale.Sixteen);
+`, [myTiles.transparency16,myTiles.tile5,myTiles.tile11,myTiles.tile12,myTiles.tile48,myTiles.tile49], TileScale.Sixteen);
         }
         return null;
     })
