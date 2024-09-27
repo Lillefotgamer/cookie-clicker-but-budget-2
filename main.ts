@@ -53,93 +53,14 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
                 `, SpriteKind.Player)
             controller.moveSprite(Cursor)
             Cursor.setStayInScreen(true)
+            CookieCounter = textsprite.create("0", 0, 7)
+            CookieCounter.setPosition(7, 113)
+            CookieCounter.changeScale(1, ScaleAnchor.Middle)
+            CookieAmount = 0
             timer.background(function () {
                 for (let index = 0; index < 999999 * 999999; index++) {
-                    GardenTick = randint(1, 10)
-                    if (GardenTick == 1) {
-                        tiles.replaceAllTiles(assets.tile`myTile14`, assets.tile`myTile15`)
-                        tiles.replaceAllTiles(assets.tile`myTile11`, assets.tile`myTile14`)
-                        GardenTick = 0
-                    }
-                    if (GardenTick == 2) {
-                        if (tiles.tileAtLocationEquals(tiles.getTileLocation(randint(5, 0), randint(0, 9)), assets.tile`myTile9`)) {
-                            GrowWeed = sprites.create(img`
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                . . . . . . . . . . . . . . . . 
-                                `, SpriteKind.Other)
-                            tiles.placeOnRandomTile(GrowWeed, assets.tile`myTile9`)
-                            if (Math.percentChance(95)) {
-                                tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile13`)
-                            } else {
-                                tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile24`)
-                            }
-                            sprites.destroyAllSpritesOfKind(SpriteKind.Other)
-                        }
-                    }
-                    if (GardenTick == 3) {
-                        Mutation = sprites.create(img`
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            `, SpriteKind.Other2)
-                        tiles.placeOnRandomTile(Mutation, assets.tile`myTile9`)
-                        if (Mutation.tileKindAt(TileDirection.Center, assets.tile`myTile9`)) {
-                            RandomMutation = randint(1, 4)
-                            RunMutation()
-                        } else {
-                            sprites.destroyAllSpritesOfKind(SpriteKind.Other2)
-                        }
-                    }
-                    if (GardenTick == 4) {
-                        tiles.replaceAllTiles(assets.tile`myTile17`, assets.tile`myTile12`)
-                        tiles.replaceAllTiles(assets.tile`myTile16`, assets.tile`myTile17`)
-                        tiles.replaceAllTiles(assets.tile`myTile13`, assets.tile`myTile16`)
-                        tiles.replaceAllTiles(assets.tile`myTile13`, assets.tile`myTile16`)
-                        GardenTick = 0
-                    }
-                    if (GardenTick == 5) {
-                        tiles.replaceAllTiles(assets.tile`myTile21`, assets.tile`myTile22`)
-                        tiles.replaceAllTiles(assets.tile`myTile18`, assets.tile`myTile21`)
-                        GardenTick = 0
-                    }
-                    if (GardenTick == 6) {
-                        tiles.replaceAllTiles(assets.tile`myTile26`, assets.tile`myTile23`)
-                        tiles.replaceAllTiles(assets.tile`myTile25`, assets.tile`myTile26`)
-                        GardenTick = 0
-                    }
-                    if (GardenTick == 7) {
-                        tiles.replaceAllTiles(assets.tile`myTile27`, assets.tile`myTile28`)
-                        tiles.replaceAllTiles(assets.tile`myTile24`, assets.tile`myTile27`)
-                        GardenTick = 0
-                    }
-                    pause(3000)
+                    GardenTick()
+                    pause(300)
                 }
             })
         }
@@ -169,6 +90,7 @@ function CallPlantKill () {
         tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile24`)
         sprites.destroyAllSpritesOfKind(SpriteKind.Other)
     }
+    sprites.destroyAllSpritesOfKind(SpriteKind.Other)
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Click()
@@ -489,6 +411,9 @@ function Bclick () {
             Tool = 3
             Cursor.sayText("Water", 500, false)
         } else if (Tool == 3) {
+            Tool = 4
+            Cursor.sayText("Harvest", 500, false)
+        } else if (Tool == 4) {
             Tool = 1
             Cursor.sayText("Plant", 500, false)
         }
@@ -1031,7 +956,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Milk, function (sprite, othe
     })
 })
 function RunMutation () {
-    WhichMutation = randint(1, 7)
+    WhichMutation = randint(1, 11)
     if (WhichMutation == 1) {
         if (RandomMutation == 1) {
             if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile15`)) {
@@ -1148,6 +1073,84 @@ function RunMutation () {
         } else if (RandomMutation == 4) {
             if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile28`)) {
                 tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile24`)
+            }
+        }
+    } else if (WhichMutation == 8) {
+        if (Math.percentChance(25)) {
+            if (RandomMutation == 1) {
+                if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile22`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile29`)
+                }
+            } else if (RandomMutation == 2) {
+                if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile22`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile29`)
+                }
+            } else if (RandomMutation == 3) {
+                if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile22`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile29`)
+                }
+            } else if (RandomMutation == 4) {
+                if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile22`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile29`)
+                }
+            }
+        }
+    } else if (WhichMutation == 9) {
+        if (RandomMutation == 1) {
+            if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile32`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile29`)
+            }
+        } else if (RandomMutation == 2) {
+            if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile32`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile29`)
+            }
+        } else if (RandomMutation == 3) {
+            if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile32`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile29`)
+            }
+        } else if (RandomMutation == 4) {
+            if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile32`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile29`)
+            }
+        }
+    } else if (WhichMutation == 10) {
+        if (Math.percentChance(5)) {
+            if (RandomMutation == 1) {
+                if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile32`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile33`)
+                }
+            } else if (RandomMutation == 2) {
+                if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile32`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile33`)
+                }
+            } else if (RandomMutation == 3) {
+                if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile32`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile33`)
+                }
+            } else if (RandomMutation == 4) {
+                if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile32`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile33`)
+                }
+            }
+        }
+    } else if (WhichMutation == 11) {
+        if (Math.percentChance(25)) {
+            if (RandomMutation == 1) {
+                if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile35`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile33`)
+                }
+            } else if (RandomMutation == 2) {
+                if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile35`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile33`)
+                }
+            } else if (RandomMutation == 3) {
+                if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile35`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile33`)
+                }
+            } else if (RandomMutation == 4) {
+                if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile35`)) {
+                    tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile33`)
+                }
             }
         }
     }
@@ -1633,6 +1636,102 @@ sprites.onOverlap(SpriteKind.GoldenCookie, SpriteKind.Milk, function (sprite, ot
     CookieAmount += 7 * CookieWorth
     sprites.destroy(sprite)
 })
+function GardenTick () {
+    GardenTick2 = randint(1, 10)
+    if (GardenTick2 == 1) {
+        tiles.replaceAllTiles(assets.tile`myTile14`, assets.tile`myTile15`)
+        tiles.replaceAllTiles(assets.tile`myTile11`, assets.tile`myTile14`)
+        GardenTick2 = 0
+    }
+    if (GardenTick2 == 2) {
+        if (tiles.tileAtLocationEquals(tiles.getTileLocation(randint(5, 0), randint(0, 9)), assets.tile`myTile9`)) {
+            GrowWeed = sprites.create(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, SpriteKind.Other)
+            tiles.placeOnRandomTile(GrowWeed, assets.tile`myTile9`)
+            if (Math.percentChance(95)) {
+                tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile13`)
+            } else {
+                tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile24`)
+            }
+            sprites.destroyAllSpritesOfKind(SpriteKind.Other)
+        }
+    }
+    if (GardenTick2 == 3) {
+        Mutation = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.Other2)
+        tiles.placeOnRandomTile(Mutation, assets.tile`myTile9`)
+        if (Mutation.tileKindAt(TileDirection.Center, assets.tile`myTile9`)) {
+            RandomMutation = randint(1, 4)
+            RunMutation()
+        } else {
+            sprites.destroyAllSpritesOfKind(SpriteKind.Other2)
+        }
+    }
+    if (GardenTick2 == 4) {
+        tiles.replaceAllTiles(assets.tile`myTile17`, assets.tile`myTile12`)
+        tiles.replaceAllTiles(assets.tile`myTile16`, assets.tile`myTile17`)
+        tiles.replaceAllTiles(assets.tile`myTile13`, assets.tile`myTile16`)
+        tiles.replaceAllTiles(assets.tile`myTile13`, assets.tile`myTile16`)
+        GardenTick2 = 0
+    }
+    if (GardenTick2 == 5) {
+        tiles.replaceAllTiles(assets.tile`myTile21`, assets.tile`myTile22`)
+        tiles.replaceAllTiles(assets.tile`myTile18`, assets.tile`myTile21`)
+        GardenTick2 = 0
+    }
+    if (GardenTick2 == 6) {
+        tiles.replaceAllTiles(assets.tile`myTile26`, assets.tile`myTile23`)
+        tiles.replaceAllTiles(assets.tile`myTile25`, assets.tile`myTile26`)
+        GardenTick2 = 0
+    }
+    if (GardenTick2 == 7) {
+        tiles.replaceAllTiles(assets.tile`myTile27`, assets.tile`myTile28`)
+        tiles.replaceAllTiles(assets.tile`myTile24`, assets.tile`myTile27`)
+        GardenTick2 = 0
+    }
+    if (GardenTick2 == 8) {
+        tiles.replaceAllTiles(assets.tile`myTile31`, assets.tile`myTile32`)
+        tiles.replaceAllTiles(assets.tile`myTile36`, assets.tile`myTile31`)
+        GardenTick2 = 0
+    }
+    if (GardenTick2 == 9) {
+        tiles.replaceAllTiles(assets.tile`myTile34`, assets.tile`myTile35`)
+        tiles.replaceAllTiles(assets.tile`myTile37`, assets.tile`myTile34`)
+        GardenTick2 = 0
+    }
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.BuyFactory, function (sprite, otherSprite) {
     if (controller.A.isPressed()) {
         if (CookieAmount > 9999) {
@@ -1711,10 +1810,12 @@ function Click () {
                 . . . . . . . . . . . . . . . . 
                 `, SpriteKind.Other)
             tiles.placeOnRandomTile(GrowWeed, assets.tile`myTile9`)
-            if (Math.percentChance(95)) {
-                tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile13`)
-            } else {
-                tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile24`)
+            if (GrowWeed.tileKindAt(TileDirection.Center, assets.tile`myTile9`)) {
+                if (Math.percentChance(97)) {
+                    tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile13`)
+                } else {
+                    tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile24`)
+                }
             }
             sprites.destroy(GrowWeed)
             sprites.destroyAllSpritesOfKind(SpriteKind.Other)
@@ -1733,15 +1834,28 @@ function Click () {
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile26`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile23`)) {
-            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile20`)
-            for (let index = 0; index < 8; index++) {
-                CallPlantKill()
-            }
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile24`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile27`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile28`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile29`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile31`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile32`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile33`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile34`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile35`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile36`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile37`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         }
     } else if (Tool == 3) {
@@ -1757,8 +1871,67 @@ function Click () {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile18`)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile20`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile25`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile29`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile36`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile33`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile37`)
+        }
+    } else if (Tool == 4) {
+        if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile15`)) {
+            CookieAmount += 1
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile22`)) {
+            CookieAmount += 3
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile12`)) {
+            for (let index = 0; index < 4; index++) {
+                CookieAmount += 0
+                tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile13`)
+                GrowWeed = sprites.create(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, SpriteKind.Other)
+                tiles.placeOnRandomTile(GrowWeed, assets.tile`myTile9`)
+                if (GrowWeed.tileKindAt(TileDirection.Center, assets.tile`myTile9`)) {
+                    if (Math.percentChance(97)) {
+                        tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile13`)
+                    } else {
+                        tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile24`)
+                    }
+                }
+                sprites.destroy(GrowWeed)
+                sprites.destroyAllSpritesOfKind(SpriteKind.Other)
+            }
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile23`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile20`)
+            for (let index = 0; index < 8; index++) {
+                CallPlantKill()
+            }
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile28`)) {
+            CookieAmount += 1
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile32`)) {
+            CookieAmount += 7
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile35`)) {
+            CookieAmount += 77
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         }
     }
+    CookieCounter.setText(convertToText(CookieAmount))
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.BuyKid, function (sprite, otherSprite) {
     if (controller.A.isPressed()) {
@@ -1771,8 +1944,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.BuyKid, function (sprite, otherS
 let KidAmount = 0
 let CheatMenuIcon: Sprite = null
 let FactoryAmount = 0
+let GardenTick2 = 0
 let BankAmount = 0
 let HackerAmount = 0
+let Mutation: Sprite = null
+let RandomMutation = 0
 let WhichMutation = 0
 let CheatMenu: miniMenu.MenuSprite = null
 let CheatMenuActivated = 0
@@ -1780,13 +1956,11 @@ let Tool = 0
 let Cookie: Sprite = null
 let GoldenCookie: Sprite = null
 let SelectedCookie = 0
-let RandomMutation = 0
-let Mutation: Sprite = null
 let GrowWeed: Sprite = null
-let GardenTick = 0
 let PlantAmount = 0
 let CookieAmount = 0
 let CookieWorth = 0
+let CookieCounter: TextSprite = null
 let UpgradeNumber = 0
 let Upgrade: Sprite = null
 let RandomCookie = 0
@@ -2141,7 +2315,7 @@ Upgrade = sprites.create(img`
     `, SpriteKind.Upgrade)
 Upgrade.setPosition(140, 8)
 UpgradeNumber = 1
-let CookieCounter = textsprite.create("0", 0, 6)
+CookieCounter = textsprite.create("0", 0, 6)
 CookieCounter.setPosition(7, 7)
 CookieCounter.changeScale(1, ScaleAnchor.Middle)
 CookieWorth = 1
@@ -2256,7 +2430,5 @@ game.onUpdateInterval(1000, function () {
     CookieAmount += 1300 * BankAmount
 })
 forever(function () {
-    if (GameStarted == 1) {
-        CookieCounter.setText(convertToText(CookieAmount))
-    }
+    CookieCounter.setText(convertToText(CookieAmount))
 })

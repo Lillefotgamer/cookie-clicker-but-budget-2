@@ -64,6 +64,22 @@ namespace myTiles {
     export const tile29 = image.ofBuffer(hex``);
     //% fixedInstance jres blockIdentity=images._tile
     export const tile30 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile31 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile33 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile34 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile35 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile36 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile37 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile38 = image.ofBuffer(hex``);
+    //% fixedInstance jres blockIdentity=images._tile
+    export const tile39 = image.ofBuffer(hex``);
 
     helpers._registerFactory("tilemap", function(name: string) {
         switch(helpers.stringTrim(name)) {
@@ -386,7 +402,7 @@ namespace myTiles {
 . . . . . . . . . . 
 . . . . . . . . . . 
 . . . . . . . . . . 
-`, [myTiles.transparency16,myTiles.tile5,myTiles.tile11,myTiles.tile12,myTiles.tile26,myTiles.tile29,myTiles.tile30], TileScale.Sixteen);
+`, [myTiles.transparency16,myTiles.tile5,myTiles.tile11,myTiles.tile12,myTiles.tile31,myTiles.tile33,myTiles.tile34,myTiles.tile35,myTiles.tile36,myTiles.tile37,myTiles.tile38,myTiles.tile39], TileScale.Sixteen);
         }
         return null;
     })
@@ -455,6 +471,22 @@ namespace myTiles {
             case "tile29":return tile29;
             case "myTile28":
             case "tile30":return tile30;
+            case "myTile29":
+            case "tile31":return tile31;
+            case "myTile31":
+            case "tile33":return tile33;
+            case "myTile32":
+            case "tile34":return tile34;
+            case "myTile33":
+            case "tile35":return tile35;
+            case "myTile34":
+            case "tile36":return tile36;
+            case "myTile35":
+            case "tile37":return tile37;
+            case "myTile36":
+            case "tile38":return tile38;
+            case "myTile37":
+            case "tile39":return tile39;
         }
         return null;
     })
