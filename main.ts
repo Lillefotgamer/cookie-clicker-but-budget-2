@@ -1682,7 +1682,7 @@ function GardenTick () {
                 . . . . . . . . . . . . . . . . 
                 `, SpriteKind.Other)
             tiles.placeOnRandomTile(GrowWeed, assets.tile`myTile9`)
-            if (Math.percentChance(97)) {
+            if (Math.percentChance(99)) {
                 tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile13`)
             } else {
                 tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile30`)
