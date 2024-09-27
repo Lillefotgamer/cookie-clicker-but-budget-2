@@ -60,7 +60,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             timer.background(function () {
                 for (let index = 0; index < 999999 * 999999; index++) {
                     GardenTick()
-                    pause(30)
+                    pause(3000)
                 }
             })
         }
@@ -956,7 +956,7 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Milk, function (sprite, othe
     })
 })
 function RunMutation () {
-    WhichMutation = randint(1, 11)
+    WhichMutation = randint(1, 12)
     if (WhichMutation == 1) {
         if (RandomMutation == 1) {
             if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile15`)) {
@@ -1151,6 +1151,24 @@ function RunMutation () {
                 if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile35`)) {
                     tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile33`)
                 }
+            }
+        }
+    } else if (WhichMutation == 12) {
+        if (RandomMutation == 1) {
+            if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile39`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile30`)
+            }
+        } else if (RandomMutation == 2) {
+            if (Mutation.tileKindAt(TileDirection.Top, assets.tile`myTile39`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile30`)
+            }
+        } else if (RandomMutation == 3) {
+            if (Mutation.tileKindAt(TileDirection.Right, assets.tile`myTile39`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile30`)
+            }
+        } else if (RandomMutation == 4) {
+            if (Mutation.tileKindAt(TileDirection.Bottom, assets.tile`myTile39`)) {
+                tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile30`)
             }
         }
     }
@@ -1664,10 +1682,13 @@ function GardenTick () {
                 . . . . . . . . . . . . . . . . 
                 `, SpriteKind.Other)
             tiles.placeOnRandomTile(GrowWeed, assets.tile`myTile9`)
-            if (Math.percentChance(95)) {
+            if (Math.percentChance(97)) {
                 tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile13`)
             } else {
-                tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile24`)
+                tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile30`)
+                Achievements.showAchievement(
+                "Let it bake"
+                )
             }
             sprites.destroyAllSpritesOfKind(SpriteKind.Other)
         }
@@ -1729,6 +1750,10 @@ function GardenTick () {
     if (GardenTick2 == 9) {
         tiles.replaceAllTiles(assets.tile`myTile34`, assets.tile`myTile35`)
         tiles.replaceAllTiles(assets.tile`myTile37`, assets.tile`myTile34`)
+        GardenTick2 = 0
+    }
+    if (GardenTick2 == 10) {
+        tiles.replaceAllTiles(assets.tile`myTile38`, assets.tile`myTile39`)
         GardenTick2 = 0
     }
 }
@@ -1829,6 +1854,12 @@ function Click () {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile37`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile30`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile38`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile39`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         }
     } else if (Tool == 3) {
         if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile4`)) {
@@ -1847,6 +1878,8 @@ function Click () {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile36`)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile33`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile37`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile30`)) {
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile38`)
         }
     } else if (Tool == 4) {
         if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile15`)) {
@@ -1900,6 +1933,9 @@ function Click () {
             CookieAmount += 7
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile35`)) {
             CookieAmount += 77
+            tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
+        } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile39`)) {
+            CookieAmount += 777
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         }
     }
