@@ -60,7 +60,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             timer.background(function () {
                 for (let index = 0; index < 999999 * 999999; index++) {
                     GardenTick()
-                    pause(300)
+                    pause(30)
                 }
             })
         }
@@ -1114,7 +1114,7 @@ function RunMutation () {
             }
         }
     } else if (WhichMutation == 10) {
-        if (Math.percentChance(5)) {
+        if (Math.percentChance(1)) {
             if (RandomMutation == 1) {
                 if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile32`)) {
                     tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile33`)
@@ -1134,7 +1134,7 @@ function RunMutation () {
             }
         }
     } else if (WhichMutation == 11) {
-        if (Math.percentChance(25)) {
+        if (Math.percentChance(5)) {
             if (RandomMutation == 1) {
                 if (Mutation.tileKindAt(TileDirection.Left, assets.tile`myTile35`)) {
                     tiles.setTileAt(tiles.locationOfSprite(Mutation), assets.tile`myTile33`)
@@ -1791,34 +1791,6 @@ function Click () {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile12`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
-            GrowWeed = sprites.create(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, SpriteKind.Other)
-            tiles.placeOnRandomTile(GrowWeed, assets.tile`myTile9`)
-            if (GrowWeed.tileKindAt(TileDirection.Center, assets.tile`myTile9`)) {
-                if (Math.percentChance(97)) {
-                    tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile13`)
-                } else {
-                    tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile24`)
-                }
-            }
-            sprites.destroy(GrowWeed)
-            sprites.destroyAllSpritesOfKind(SpriteKind.Other)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile18`)) {
             tiles.setTileAt(tiles.locationOfSprite(Cursor), assets.tile`myTile9`)
         } else if (Cursor.tileKindAt(TileDirection.Center, assets.tile`myTile19`)) {
