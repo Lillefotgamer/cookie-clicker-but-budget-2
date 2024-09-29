@@ -37,6 +37,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             sprites.destroy(Textsprite2)
             sprites.destroy(TextSprite3)
             sprites.destroy(PressAToStart)
+            sprites.destroyAllSpritesOfKind(SpriteKind.Text)
             color.startFadeFromCurrent(color.originalPalette, 1000)
             tiles.setCurrentTilemap(tilemap`level16`)
             Cursor = sprites.create(img`
@@ -60,7 +61,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             timer.background(function () {
                 for (let index = 0; index < 999999 * 999999; index++) {
                     GardenTick()
-                    pause(3000)
+                    pause(3)
                 }
             })
         }
@@ -98,6 +99,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Click()
     if (GameStarted == 1) {
         if (Cursor.overlapsWith(BigCookie)) {
+            if (Math.percentChance(1)) {
+                if (Math.percentChance(1)) {
+                    Achievements.showAchievement(
+                    "Just Plain Lucky"
+                    )
+                }
+            }
             animation.runImageAnimation(
             BigCookie,
             [img`
@@ -507,6 +515,9 @@ sprites.onOverlap(SpriteKind.GoldenCookie, SpriteKind.Player, function (sprite, 
                     GoldenCookie.setPosition(randint(10, 150), 0)
                     GoldenCookie.vy = 70
                 }
+                Achievements.showAchievement(
+                "Four Leaf Cookie"
+                )
             }
         }
     }
@@ -1693,9 +1704,29 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Upgrade, function (sprite, other
 sprites.onOverlap(SpriteKind.Player, SpriteKind.CookieHacking, function (sprite, otherSprite) {
     if (controller.A.isPressed()) {
         if (CookieAmount > 999999) {
+            if (HackerAmount == 0) {
+                Achievements.showAchievement(
+                "HardCore Baker"
+                )
+            }
             HackerAmount += 1
             CookieAmount += -1000000
         }
+    }
+})
+controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (GameStarted == 1) {
+        game.showLongText("Theres 6 achivements", DialogLayout.Bottom)
+        game.showLongText("Achivements can only be aquired in the normal mode", DialogLayout.Bottom)
+        game.showLongText("Achivement 1: Cookie Addict Unlock all the Cookies", DialogLayout.Bottom)
+        game.showLongText("Achivement 2: Just plain lucky a 1/10000 every time you click the cookie", DialogLayout.Bottom)
+        game.showLongText("Achivement 3: Hardcore Baker buy the last tower", DialogLayout.Bottom)
+        game.showLongText("Achivement 4: Four leaf cookie Get 4X Golden cookies after clicking on one", DialogLayout.Bottom)
+        game.showLongText("Achivement 5: Legal buy 100 kids", DialogLayout.Bottom)
+        game.showLongText("Achivement 6: Informed Im just gonna give you this one :)", DialogLayout.Bottom)
+        Achievements.showAchievement(
+        "Informed"
+        )
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.CookieBank, function (sprite, otherSprite) {
@@ -1712,7 +1743,7 @@ sprites.onOverlap(SpriteKind.GoldenCookie, SpriteKind.Milk, function (sprite, ot
 })
 function GardenTick () {
     if (GardenOpen == 1) {
-        GardenTick2 = randint(1, 12)
+        GardenTick2 = randint(1, 13)
         if (GardenTick2 == 1) {
             tiles.replaceAllTiles(assets.tile`myTile14`, assets.tile`myTile15`)
             tiles.replaceAllTiles(assets.tile`myTile11`, assets.tile`myTile14`)
@@ -1743,9 +1774,6 @@ function GardenTick () {
                     tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile13`)
                 } else {
                     tiles.setTileAt(tiles.locationOfSprite(GrowWeed), assets.tile`myTile30`)
-                    Achievements.showAchievement(
-                    "Let it bake"
-                    )
                 }
                 sprites.destroyAllSpritesOfKind(SpriteKind.Other)
             }
@@ -1820,6 +1848,11 @@ function GardenTick () {
             GardenTick2 = 0
         }
         if (GardenTick2 == 12) {
+            tiles.replaceAllTiles(assets.tile`myTile46`, assets.tile`myTile47`)
+            tiles.replaceAllTiles(assets.tile`myTile45`, assets.tile`myTile46`)
+            GardenTick2 = 0
+        }
+        if (GardenTick2 == 13) {
             tiles.replaceAllTiles(assets.tile`myTile38`, assets.tile`myTile39`)
             GardenTick2 = 0
         }
@@ -2040,6 +2073,11 @@ function Click () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.BuyKid, function (sprite, otherSprite) {
     if (controller.A.isPressed()) {
         if (CookieAmount > 99) {
+            if (KidAmount == 99) {
+                Achievements.showAchievement(
+                "Legal"
+                )
+            }
             KidAmount += 1
             CookieAmount += -100
         }
@@ -2206,7 +2244,9 @@ Textsprite2 = textsprite.create("But Budget", 0, 6)
 Textsprite2.changeScale(0.5, ScaleAnchor.Middle)
 Textsprite2.setPosition(80, 35)
 TextSprite3 = textsprite.create("B to open W.I.P garden", 0, 6)
-TextSprite3.setPosition(80, 107)
+TextSprite3.setPosition(80, 80)
+let Textsprite4 = textsprite.create("Menu for info", 0, 6)
+Textsprite4.setPosition(80, 99)
 PressAToStart = sprites.create(img`
     666666666..666666666...66666666..666666666...666666666..........66666.....66666666666..6666666.......666666666..66666666666.....66666......66666666..66666666666
     6666666666.6666666666.666666666.66666666666.66666666666........6666666....66666666666.666666666.....66666666666.66666666666....6666666....666666666..66666666666
@@ -2226,7 +2266,7 @@ PressAToStart = sprites.create(img`
     666........666....666..66666666..666666666...666666666......666.......666.....666......6666666.......666666666......666.....666.......666.666....666.....666....
     `, SpriteKind.Text)
 PressAToStart.changeScale(-0.1, ScaleAnchor.Middle)
-PressAToStart.setPosition(80, 80)
+PressAToStart.setPosition(80, 59)
 pauseUntil(() => controller.A.isPressed())
 pauseUntil(() => GardenOpen == 0)
 color.FadeToBlack.startScreenEffect(1000)
