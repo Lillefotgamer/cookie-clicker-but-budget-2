@@ -61,7 +61,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             timer.background(function () {
                 for (let index = 0; index < 999999 * 999999; index++) {
                     GardenTick()
-                    pause(3)
+                    pause(3000)
                 }
             })
         }
