@@ -1,5 +1,5 @@
 {
-    "name": "Cookie Clicker but budget 2 DEMO",
+    "name": "Cookie Clicker but budget 2 DEMO V3",
     "description": "",
     "dependencies": {
         "device": "*",
@@ -10,7 +10,9 @@
         "pxt-button-combos": "github:jwunderl/pxt-button-combos#v0.0.24",
         "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1",
         "Color Fading": "github:jwunderl/pxt-color#v0.2.3",
-        "tilemaps": "github:microsoft/pxt-tilemaps#v1.12.0"
+        "tilemaps": "github:microsoft/pxt-tilemaps#v1.12.0",
+        "arcade-fake-button-press": "github:riknoll/arcade-fake-button-press#v0.0.4",
+        "arcade-story": "github:microsoft/arcade-storytelling#v1.0.3"
     },
     "files": [
         "main.blocks",

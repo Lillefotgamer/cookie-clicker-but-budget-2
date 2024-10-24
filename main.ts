@@ -58,10 +58,11 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             CookieCounter.setPosition(7, 113)
             CookieCounter.changeScale(1, ScaleAnchor.Middle)
             CookieAmount = 0
+            GardenTickCooldown = 3000
             timer.background(function () {
                 for (let index = 0; index < 999999 * 999999; index++) {
                     GardenTick()
-                    pause(3000)
+                    pause(GardenTickCooldown)
                 }
             })
         }
@@ -528,12 +529,14 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.CheatMenu, function (sprite, oth
             pause(500)
             CheatMenu.close()
             CheatMenuActivated = 0
+            NotAAutoClickerOn = 0
         }
     }
     if (CheatMenuActivated == 0) {
         if (controller.A.isPressed()) {
             pause(500)
             CheatMenuActivated = 1
+            NotAAutoClickerOn = 0
             CheatMenu = miniMenu.createMenuFromArray([
             miniMenu.createMenuItem("GoldenCookie", img`
                 . . . . . f f f f f f . . . . . 
@@ -589,7 +592,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.CheatMenu, function (sprite, oth
                 . . . c c f f f f f f c c . . . 
                 . . . . . c c c c c c . . . . . 
                 `),
-            miniMenu.createMenuItem("Wipe", img`
+            miniMenu.createMenuItem("NotAAutoClicker", img`
                 . . . . f f f . . . . 
                 . . f f 1 d d f f . . 
                 . f 1 1 1 1 d d d f . 
@@ -670,7 +673,13 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.CheatMenu, function (sprite, oth
                 } else if (selectedIndex == 2) {
                     CookieAmount = 0
                 } else if (selectedIndex == 3) {
-                    game.reset()
+                    if (NotAAutoClickerOn == 1) {
+                        NotAAutoClickerOn = 0
+                    }
+                    CheatMenu.close()
+                    CheatMenuActivated = 0
+                    pause(5000)
+                    NotAAutoClickerOn = 1
                 } else if (selectedIndex == 4) {
                     Cookie = sprites.create(img`
                         d . . . . . . d 
@@ -1715,19 +1724,167 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.CookieHacking, function (sprite,
     }
 })
 controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (GameStarted == 1) {
-        game.showLongText("Theres 6 achivements", DialogLayout.Bottom)
-        game.showLongText("Achivements can only be aquired in the normal mode", DialogLayout.Bottom)
-        game.showLongText("Achivement 1: Cookie Addict Unlock all the Cookies", DialogLayout.Bottom)
-        game.showLongText("Achivement 2: Just plain lucky a 1/10000 every time you click the cookie", DialogLayout.Bottom)
-        game.showLongText("Achivement 3: Hardcore Baker buy the last tower", DialogLayout.Bottom)
-        game.showLongText("Achivement 4: Four leaf cookie Get 4X Golden cookies after clicking on one", DialogLayout.Bottom)
-        game.showLongText("Achivement 5: Legal buy 100 kids", DialogLayout.Bottom)
-        game.showLongText("Achivement 6: Informed Im just gonna give you this one :)", DialogLayout.Bottom)
-        Achievements.showAchievement(
-        "Informed"
-        )
-    }
+    Info = miniMenu.createMenu(
+    miniMenu.createMenuItem("Achivements", img`
+        . . . . . . 6 6 6 6 . . . . . . 
+        . . . . . 6 4 4 4 4 6 . . . . . 
+        . . . . 6 4 4 4 4 4 4 6 . . . . 
+        . . . 6 4 4 4 4 4 4 4 4 6 . . . 
+        . . . 6 4 4 4 4 4 4 4 4 6 . . . 
+        . . . 6 4 4 4 4 4 4 4 4 6 . . . 
+        . . . 6 4 4 4 4 4 4 4 e 6 . . . 
+        . . . . 6 4 4 4 4 4 e 6 . . . . 
+        . . . . d 6 e e e e 6 d . . . . 
+        . . . . d 1 6 6 6 6 1 d . . . . 
+        . . . . d 1 1 1 1 1 1 d . . . . 
+        . . . . d 1 1 d d 1 1 d . . . . 
+        . . . . d 1 d . . d 1 d . . . . 
+        . . . . d d . . . . d d . . . . 
+        . . . . d . . . . . . d . . . . 
+        . . . . . . . . . . . . . . . . 
+        `),
+    miniMenu.createMenuItem("Updates", img`
+        .............f...........
+        ............f4f..........
+        ............f4f..........
+        ...........f444f.........
+        ...........f444f.........
+        ...........f4f4f.........
+        ..........f4f1f4f........
+        ..........f4f1f4f........
+        ..........f4fdf4f........
+        ..........f44f44f........
+        .........ff44444ff.......
+        ........fef44444fef......
+        ........fef44444fef......
+        .......feef44444feef.....
+        .......fffffffffffff.....
+        ...........fbbbf.........
+        ...........fffff.........
+        ...........fddddf........
+        ..........fd1111df.......
+        .........fdd11111df......
+        .........fd111111df......
+        ..........fd111ddf.......
+        ..........fd1ddff........
+        ...........fdff..........
+        ............f............
+        `),
+    miniMenu.createMenuItem("Minigames", img`
+        . . . . . f f f f f f . . . . . 
+        . . . f f 6 6 6 6 1 1 f f . . . 
+        . . f 6 6 6 6 6 6 6 6 1 1 f . . 
+        . f 6 6 6 6 6 1 1 6 6 6 1 1 f . 
+        . f 6 6 6 6 6 1 1 6 6 6 1 1 f . 
+        f 6 6 6 6 6 6 6 6 6 6 6 1 1 1 f 
+        f 6 6 6 6 6 6 6 6 6 6 1 1 1 1 f 
+        f 6 6 6 6 6 6 6 6 6 1 1 1 1 1 f 
+        f 6 6 6 6 6 6 6 6 1 1 1 1 1 1 f 
+        f 6 6 6 6 1 1 1 1 1 1 1 1 1 1 f 
+        f 6 6 6 1 1 1 1 1 1 1 1 1 1 1 f 
+        . f 6 6 1 1 1 6 6 1 1 1 1 1 f . 
+        . f 6 6 1 1 1 6 6 1 1 1 1 1 f . 
+        . . f 6 6 1 1 1 1 1 1 1 1 f . . 
+        . . . f f 6 6 1 1 1 1 f f . . . 
+        . . . . . f f f f f f . . . . . 
+        `),
+    miniMenu.createMenuItem("Crates", img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        f f f f f f f f f f f f f f f f 
+        f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
+        f 6 e 4 4 4 4 4 4 4 4 4 4 e 6 f 
+        f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
+        f f f f f f f 1 1 f f f f f f f 
+        f 6 e 4 4 4 4 1 d 4 4 4 4 e 6 f 
+        f 6 e 4 4 4 4 d d 4 4 4 4 e 6 f 
+        f 6 e 4 4 4 4 4 4 4 4 4 4 e 6 f 
+        f 6 e 4 4 4 4 4 4 4 4 4 4 e 6 f 
+        f 6 e 4 4 4 4 4 4 4 4 4 4 e 6 f 
+        f 6 e e e e e e e e e e e e 6 f 
+        f 6 6 6 6 6 6 6 6 6 6 6 6 6 6 f 
+        f f f f f f f f f f f f f f f f 
+        `),
+    miniMenu.createMenuItem("Shop", img`
+        . . . 8 8 8 8 8 8 8 8 8 8 . . . 
+        . . . 8 7 7 7 7 7 7 7 7 8 . . . 
+        . . . 8 7 7 7 7 7 7 7 7 8 . . . 
+        . . . 8 7 7 8 8 8 8 7 7 8 . . . 
+        . . . 8 7 8 7 7 7 7 8 7 8 . . . 
+        . . . 8 7 8 7 7 7 7 7 7 8 . . . 
+        . . . 8 7 8 7 7 7 7 7 7 8 . . . 
+        . . . 8 7 7 8 8 8 8 7 7 8 . . . 
+        . . . 8 7 7 7 7 7 7 8 7 8 . . . 
+        . . . 8 7 7 7 7 7 7 8 7 8 . . . 
+        . . . 8 7 8 7 7 7 7 8 7 8 . . . 
+        . . . 8 7 7 8 8 8 8 7 7 8 . . . 
+        . . . 8 7 7 7 7 7 7 7 7 8 . . . 
+        . . . 8 7 7 7 7 7 7 7 7 8 . . . 
+        . . . 8 7 7 7 7 7 7 7 7 8 . . . 
+        . . . 8 8 8 8 8 8 8 8 8 8 . . . 
+        `),
+    miniMenu.createMenuItem("Effects", img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f f . . . . . 
+        . . . . . . f e e e f . . . . . 
+        . . . . . . f f f f f . . . . . 
+        . . . . . . . f a f . . . . . . 
+        . . . . . . f f f f f . . . . . 
+        . . . . . f a a a a a f . . . . 
+        . . . . f a a a a a a a f . . . 
+        . . . f a a c c a a a a a f . . 
+        . . . f a a c c a a c a a f . . 
+        . . . f a a a a a a a a a f . . 
+        . . . f a a a a a a a a a f . . 
+        . . . f a a a a a a a a a f . . 
+        . . . . f a a a c a a a f . . . 
+        . . . . . f a a a a a f . . . . 
+        . . . . . . f f f f f . . . . . 
+        `),
+    miniMenu.createMenuItem("Close", img`
+        6 6 6 . . . . . . . . . . 6 6 6 
+        6 2 2 6 . . . . . . . . 6 2 2 6 
+        6 2 2 2 6 . . . . . . 6 2 2 2 6 
+        . 6 2 2 2 6 . . . . 6 2 2 2 6 . 
+        . . 6 2 2 2 6 . . 6 2 2 2 6 . . 
+        . . . 6 2 2 2 6 6 2 2 2 6 . . . 
+        . . . . 6 2 2 2 2 2 2 6 . . . . 
+        . . . . . 6 2 2 2 2 6 . . . . . 
+        . . . . . 6 2 2 2 2 6 . . . . . 
+        . . . . 6 2 2 2 2 2 2 6 . . . . 
+        . . . 6 2 2 2 6 6 2 2 2 6 . . . 
+        . . 6 2 2 2 6 . . 6 2 2 2 6 . . 
+        . 6 2 2 2 6 . . . . 6 2 2 2 6 . 
+        6 2 2 2 6 . . . . . . 6 2 2 2 6 
+        6 2 2 6 . . . . . . . . 6 2 2 6 
+        6 6 6 . . . . . . . . . . 6 6 6 
+        `)
+    )
+    Info.setFrame(img`
+        . . . . . . . . . . . . . . . 
+        . . 6 6 6 6 6 6 6 6 6 6 6 . . 
+        . 6 6 6 6 6 6 6 6 6 6 6 6 6 . 
+        . 6 6 6 6 6 6 6 6 6 6 6 6 6 . 
+        . 6 6 6 6 d d d d d 6 6 6 6 . 
+        . 6 6 6 d d d d d d d 6 6 6 . 
+        . 6 6 6 d d d d d d d 6 6 6 . 
+        . 6 6 6 d d d d d d d 6 6 6 . 
+        . 6 6 6 d d d d d d d 6 6 6 . 
+        . 6 6 6 d d d d d d d 6 6 6 . 
+        . 6 6 6 6 d d d d d 6 6 6 6 . 
+        . 6 6 6 6 6 6 6 6 6 6 6 6 6 . 
+        . 6 6 6 6 6 6 6 6 6 6 6 6 . . 
+        . . 6 6 6 6 6 6 6 6 6 6 . . . 
+        . . . . . . . . . . . . . . . 
+        `)
+    Info.setMenuStyleProperty(miniMenu.MenuStyleProperty.Height, 100)
+    Info.setPosition(80, 60)
+    Info.onButtonPressed(controller.A, function (selection, selectedIndex) {
+        if (selectedIndex == 6) {
+            Info.close()
+        }
+    })
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.CookieBank, function (sprite, otherSprite) {
     if (controller.A.isPressed()) {
@@ -1893,6 +2050,9 @@ controller.combos.attachCombo("AABBABAA", function () {
             . . . . . f f f f f f . . . . . 
             `, SpriteKind.CheatMenu)
         CheatMenuIcon.setPosition(150, 110)
+    } else if (GardenOpen == 1) {
+        GardenTickCooldown = 300
+        Cursor.sayText("Plants now grow 10X times faster", 5000, false)
     }
 })
 function Click () {
@@ -2088,10 +2248,12 @@ let CheatMenuIcon: Sprite = null
 let FactoryAmount = 0
 let GardenTick2 = 0
 let BankAmount = 0
+let Info: miniMenu.MenuSprite = null
 let HackerAmount = 0
 let Mutation: Sprite = null
 let RandomMutation = 0
 let WhichMutation = 0
+let NotAAutoClickerOn = 0
 let CheatMenu: miniMenu.MenuSprite = null
 let CheatMenuActivated = 0
 let Tool = 0
@@ -2099,15 +2261,16 @@ let Cookie: Sprite = null
 let GoldenCookie: Sprite = null
 let SelectedCookie = 0
 let GrowWeed: Sprite = null
+let GardenTickCooldown = 0
 let PlantAmount = 0
 let CookieAmount = 0
+let Cursor: Sprite = null
 let CookieWorth = 0
 let CookieCounter: TextSprite = null
 let UpgradeNumber = 0
 let Upgrade: Sprite = null
 let RandomCookie = 0
 let Milk: Sprite = null
-let Cursor: Sprite = null
 let BigCookie: Sprite = null
 let GameStarted = 0
 let GardenOpen = 0
@@ -2301,20 +2464,6 @@ BigCookie = sprites.create(img`
     `, SpriteKind.BigCookie)
 BigCookie.changeScale(3, ScaleAnchor.Middle)
 BigCookie.setPosition(80, 50)
-Cursor = sprites.create(img`
-    f f . . . . . 
-    f 1 f . . . . 
-    f 1 1 f . . . 
-    f 1 1 1 f . . 
-    f 1 1 1 1 f . 
-    f 1 1 1 1 1 f 
-    f 1 1 1 f f f 
-    f 1 f 1 1 f . 
-    f f f 1 1 f . 
-    . . . f f . . 
-    `, SpriteKind.Player)
-controller.moveSprite(Cursor)
-Cursor.setStayInScreen(true)
 Milk = sprites.create(img`
     ................................................................................................................................................................
     ................................................................................................................................................................
@@ -2558,6 +2707,20 @@ BuyTower = sprites.create(img`
     6666666666666666666666666666666666666666
     `, SpriteKind.CookieHacking)
 BuyTower.setPosition(20, 96)
+Cursor = sprites.create(img`
+    f f . . . . . 
+    f 1 f . . . . 
+    f 1 1 f . . . 
+    f 1 1 1 f . . 
+    f 1 1 1 1 f . 
+    f 1 1 1 1 1 f 
+    f 1 1 1 f f f 
+    f 1 f 1 1 f . 
+    f f f 1 1 f . 
+    . . . f f . . 
+    `, SpriteKind.Player)
+controller.moveSprite(Cursor)
+Cursor.setStayInScreen(true)
 game.onUpdateInterval(1000, function () {
     CookieAmount += 14000 * HackerAmount
 })
@@ -2572,6 +2735,12 @@ game.onUpdateInterval(1000, function () {
 })
 game.onUpdateInterval(1000, function () {
     CookieAmount += 1300 * BankAmount
+})
+forever(function () {
+    if (NotAAutoClickerOn == 1) {
+        fakeButtons.pressButton(ControllerButton.A)
+        fakeButtons.releaseButton(ControllerButton.A)
+    }
 })
 forever(function () {
     CookieCounter.setText(convertToText(CookieAmount))
